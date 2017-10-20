@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Project picasso - initial config  </h2>
+
+
+<p> indicar las coordenadas  </p>
+
+
+<form>
+    posicion x <br>
+    <input type="text" name="xPos"><br>
+    posicion y <br>
+    <input type="text" name="yPos">
+</form>
+
+
+
+
+
+<img id="imageElemnet" src=""   style="width:100%;height:100%;position: absolute; display:none;  top: 0; left: 0; ">
+
+<script type="text/javascript">
+
+    window.onload = function() {
+
+      //  const base64Decode = 'data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
+
+        var imgElement  = document.getElementById("imageElemnet");
+
+        var fullScreenHeight = window.screen.availHeight;
+        var fullScreenWidth = window.screen.availWidth;
+
+   /*     setTimeout(function () {
+           // imgElement.setAttribute("src",base64Decode);
+            imgElement.style.display = 'block'
+        },3000);
+*/
+       /*
+        var evsrc = new EventSource("/events?Height=19600&1566");
+        evsrc.onmessage = function (ev) {
+            var data = ev.data;
+            imgElement.setAttribute("src","data:image/jpg;base64," + data);
+            imgElement.style.display = 'block';
+
+            setTimeout(function () {
+                imgElement.style.display = 'none';
+            },8000)
+
+        };
+
+
+*/
+        var ws;
+        if (window.WebSocket === undefined) {
+            $("#container").append("Your browser does not support WebSockets");
+            return;
+        } else {
+            ws = initWS();
+        }
+        function initWS() {
+            var socket = new WebSocket("ws://localhost:8080/ws?parametro=1");
+             //   container = $("#container")
+            socket.onopen = function() {
+                console.log("open")
+            };
+            socket.onmessage = function (e) {
+                console.log("mensaje")
+            };
+            socket.onclose = function () {
+                console.log("cerrar")
+            };
+            return socket;
+        }
+
+
+
+
+
+    }
+
+
+</script>
+
+</body>
+</html>
