@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/base64"
 	"fmt"
+	"github.com/gorilla/websocket"
 	"image"
 	"image/draw"
 	"image/jpeg"
@@ -11,11 +12,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gorilla/websocket"
-	_ "golang.org/x/net/websocket"
-
 	_ "encoding/json"
-	_ "time"
 	"strconv"
 )
 
@@ -24,7 +21,6 @@ type deviceConfiguration struct {
 	ResolutionWidth  int
 
 	Coordinate image.Point
-
 }
 
 type Client struct {
@@ -63,10 +59,9 @@ var upgrader = websocket.Upgrader{
 	WriteBufferSize: 1024,
 }
 
-
-func (manager *ClientManager) send(message []byte ) {
+func (manager *ClientManager) send(message []byte) {
 	for conn := range manager.clients {
-			conn.send <- message
+		conn.send <- message
 
 	}
 }
@@ -74,45 +69,44 @@ func (manager *ClientManager) send(message []byte ) {
 func (manager *ClientManager) start() {
 	for {
 		select {
-			case cliReg := <-manager.register:
-				manager.clients[cliReg] = true
-				//jsonMessage, _ := json.Marshal(&Message{Content: "/A new socket has connected."})
-				//manager.send(jsonMessage, cliReg)
-			case clieUnReg := <-manager.unregister:
-				if _, ok := manager.clients[clieUnReg]; ok {
-					close(clieUnReg.send)
-					delete(manager.clients, clieUnReg)
-					//		jsonMessage, _ := json.Marshal(&Message{Content: "/A socket has disconnected."})
-					//		manager.send(jsonMessage, cliReg)
-				}
-			case pic := <-manager.picture:
-				for client := range manager.clients {
-					client.prossPic <- pic
+		case cliReg := <-manager.register:
+			manager.clients[cliReg] = true
+			//jsonMessage, _ := json.Marshal(&Message{Content: "/A new socket has connected."})
+			//manager.send(jsonMessage, cliReg)
+		case clieUnReg := <-manager.unregister:
+			if _, ok := manager.clients[clieUnReg]; ok {
+				close(clieUnReg.send)
+				delete(manager.clients, clieUnReg)
+				//		jsonMessage, _ := json.Marshal(&Message{Content: "/A socket has disconnected."})
+				//		manager.send(jsonMessage, cliReg)
+			}
+		case pic := <-manager.picture:
+			for client := range manager.clients {
+				client.prossPic <- pic
 
-						/*default:
-						close(client.send)
-						delete(manager.clients, client)*/
-				}
+				/*default:
+				close(client.send)
+				delete(manager.clients, client)*/
+			}
 
 			/*case message := <-manager.picBroadcast:
-				for cli := range manager.clients {
-					select {
-						case cli.send <- message:
+			for cli := range manager.clients {
+				select {
+					case cli.send <- message:
 
-						default:
-							close(cli.send)
-							delete(manager.clients, cli)
+					default:
+						close(cli.send)
+						delete(manager.clients, cli)
 
-					}
-				}*/
+				}
+			}*/
 		}
-			//for clientToSend := range manager.clients{
+		//for clientToSend := range manager.clients{
 
-			//}
+		//}
 
 	}
 }
-
 
 func wsHandler(w http.ResponseWriter, r *http.Request) {
 
@@ -129,15 +123,13 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 
 	queryValues := r.URL.Query()
 
-
-
-	width , _ := strconv.Atoi(queryValues.Get("width"))
-	height , _ := strconv.Atoi(queryValues.Get("height"))
-	coorX , _ := strconv.Atoi(queryValues.Get("coordenadasX"))
-	coorY , _ := strconv.Atoi(queryValues.Get("coordenadasY"))
+	width, _ := strconv.Atoi(queryValues.Get("width"))
+	height, _ := strconv.Atoi(queryValues.Get("height"))
+	coorX, _ := strconv.Atoi(queryValues.Get("coordenadasX"))
+	coorY, _ := strconv.Atoi(queryValues.Get("coordenadasY"))
 	client := &Client{clientID: "test",
-					config: deviceConfiguration{height, width, image.Point{coorX,coorY} },
-					socket: conn, isConnected: true, graphicID: 1, prossPic:make(chan image.Image), send:make(chan []byte)}
+		config: deviceConfiguration{height, width, image.Point{coorX, coorY}},
+		socket: conn, isConnected: true, graphicID: 1, prossPic: make(chan image.Image), send: make(chan []byte)}
 
 	manager.register <- client
 
@@ -147,7 +139,6 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-
 func (c *Client) processPic() {
 
 	defer func() {
@@ -156,16 +147,16 @@ func (c *Client) processPic() {
 
 	for {
 		select {
-			case picture, ok := <-c.prossPic:
-				if !ok {
-					c.socket.WriteMessage(websocket.CloseMessage, []byte{})
-					return
-				}
-
-				//manager.picBroadcast <- c.getByteCastPicture(&picture)
-				 c.send <- c.getByteCastPicture(&picture)
-				//c.socket.WriteMessage(websocket.TextMessage, c.getByteCastPicture(picture))
+		case picture, ok := <-c.prossPic:
+			if !ok {
+				c.socket.WriteMessage(websocket.CloseMessage, []byte{})
+				return
 			}
+
+			//manager.picBroadcast <- c.getByteCastPicture(&picture)
+			c.send <- c.getByteCastPicture(&picture)
+			//c.socket.WriteMessage(websocket.TextMessage, c.getByteCastPicture(picture))
+		}
 	}
 
 }
@@ -224,8 +215,8 @@ func (c *Client) getChunkImageForClient(originImage *image.Image) image.Image {
 	fmt.Printf("%v\n%v\n", chunkHeight, chunkWidth)
 
 	rec := imgReal.Bounds()
-	m0 := image.NewRGBA(image.Rect(0, 0,chunkWidth ,chunkHeight))
-	draw.Draw(m0, image.Rect(0, 0, rec.Max.X,rec.Max.Y), imgReal, c.config.Coordinate, draw.Src)
+	m0 := image.NewRGBA(image.Rect(0, 0, chunkWidth, chunkHeight))
+	draw.Draw(m0, image.Rect(0, 0, rec.Max.X, rec.Max.Y), imgReal, c.config.Coordinate, draw.Src)
 	//m1 := m0.SubImage(image.Rect(0, 0, chunkWidth, chunkHeight)).(*image.RGBA)
 
 	return m0
