@@ -212,11 +212,13 @@ func (c *Client) getChunkImageForClient(originImage *image.Image) image.Image {
 	//bounds := imgReal.Bounds()
 	chunkWidth := c.config.ResolutionWidth
 	chunkHeight := c.config.ResolutionHeight
-	fmt.Printf("%v\n%v\n", chunkHeight, chunkWidth)
+	fmt.Printf("%v\n%v\n",  chunkWidth,chunkHeight)
 
-	rec := imgReal.Bounds()
+	//rec := imgReal.Bounds()
 	m0 := image.NewRGBA(image.Rect(0, 0, chunkWidth, chunkHeight))
-	draw.Draw(m0, image.Rect(0, 0, rec.Max.X, rec.Max.Y), imgReal, c.config.Coordinate, draw.Src)
+	//draw.Draw(m0, image.Rect(0, 0, rec.Max.X, rec.Max.Y), imgReal, c.config.Coordinate, draw.Src)
+	draw.Draw(m0, image.Rect(0, 0, 7680, 4800), imgReal, c.config.Coordinate, draw.Src)
+
 	//m1 := m0.SubImage(image.Rect(0, 0, chunkWidth, chunkHeight)).(*image.RGBA)
 
 	return m0
