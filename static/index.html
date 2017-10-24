@@ -8,11 +8,14 @@
 <p> indicar las coordenadas  </p>
 
 
-<form>
+<form id="formCordenadas">
     posicion x <br>
-    <input type="text" name="xPos"><br>
+    <input type="text" name="xPos" /><br>
     posicion y <br>
-    <input type="text" name="yPos">
+    <input type="text" name="yPos" /><br>
+
+    <input  type="button" name="enviar" value="enviar" onclick="sendData()" >
+
 </form>
 
 
@@ -23,35 +26,21 @@
 
 <script type="text/javascript">
 
-    window.onload = function() {
+    function sendData(){
 
-      //  const base64Decode = 'data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
+        var form = document.getElementById("formCordenadas");
+
+        var posX = document.querySelector('[name="xPos"]').value;
+        var posY = document.querySelector('[name="yPos"]').value;
+
 
         var imgElement  = document.getElementById("imageElemnet");
 
         var fullScreenHeight = window.screen.availHeight;
         var fullScreenWidth = window.screen.availWidth;
 
-   /*     setTimeout(function () {
-           // imgElement.setAttribute("src",base64Decode);
-            imgElement.style.display = 'block'
-        },3000);
-*/
-       /*
-        var evsrc = new EventSource("/events?Height=19600&1566");
-        evsrc.onmessage = function (ev) {
-            var data = ev.data;
-            imgElement.setAttribute("src","data:image/jpg;base64," + data);
-            imgElement.style.display = 'block';
+        var url = "ws://"  + document.location.host + "/ws?height=" + fullScreenHeight + "&width=" + fullScreenWidth + "&coordenadasX=" + posX  + "&coordenadasY=" +  posY ;
 
-            setTimeout(function () {
-                imgElement.style.display = 'none';
-            },8000)
-
-        };
-
-
-*/
         var ws;
         if (window.WebSocket === undefined) {
             $("#container").append("Your browser does not support WebSockets");
@@ -60,14 +49,20 @@
             ws = initWS();
         }
         function initWS() {
-            var socket = new WebSocket("ws://localhost:8080/ws?parametro=1");
-             //   container = $("#container")
+            var socket = new WebSocket(url);
+            //   container = $("#container")
             socket.onopen = function() {
                 console.log("open")
             };
+
             socket.onmessage = function (e) {
-                console.log("mensaje")
+                console.log("mensaje");
+                toggleFullScreen();
+                var data = e.data;
+                imgElement.setAttribute("src","data:image/jpg;base64," + data);
+                imgElement.style.display = 'block';
             };
+
             socket.onclose = function () {
                 console.log("cerrar")
             };
@@ -77,7 +72,21 @@
 
 
 
+    }
 
+    function toggleFullScreen() {
+        var doc = window.document;
+        var docEl = doc.documentElement;
+
+        var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+        var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+        if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+            requestFullScreen.call(docEl);
+        }
+        else {
+            cancelFullScreen.call(doc);
+        }
     }
 
 
