@@ -40,7 +40,7 @@ type ClientManager struct {
 	broadcast    chan []byte
 	register     chan *Client
 	unregister   chan *Client
-	picBroadcast chan []byte
+	picBroadcast chan map[*Client][]byte
 }
 
 var manager = ClientManager{
@@ -49,7 +49,7 @@ var manager = ClientManager{
 	register:     make(chan *Client),
 	unregister:   make(chan *Client),
 	clients:      make(map[*Client]bool),
-	picBroadcast: make(chan []byte),
+
 }
 
 //var clientConn = make(map[*websocket.Conn]Client) //make(map[*websocket.Conn]bool) // connected clientConn
@@ -67,6 +67,8 @@ func (manager *ClientManager) send(message []byte) {
 }
 
 func (manager *ClientManager) start() {
+
+
 	for {
 		select {
 		case cliReg := <-manager.register:
@@ -89,10 +91,11 @@ func (manager *ClientManager) start() {
 				delete(manager.clients, client)*/
 			}
 
-			/*case message := <-manager.picBroadcast:
+
+		/*	case   messageMap := <-manager.picBroadcast:
 			for cli := range manager.clients {
 				select {
-					case cli.send <- message:
+					case cli.send <- messageMap[cli]:
 
 					default:
 						close(cli.send)
@@ -101,7 +104,21 @@ func (manager *ClientManager) start() {
 				}
 			}*/
 		}
-		//for clientToSend := range manager.clients{
+
+
+
+
+			/*for cli := range manager.clients {
+				select {
+				case cli.send <- PicClientMap[cli]:
+
+				default:
+					close(cli.send)
+					delete(manager.clients, cli)
+
+				}
+			}*/
+			//for clientToSend := range manager.clients{
 
 		//}
 
@@ -127,6 +144,7 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 	height, _ := strconv.Atoi(queryValues.Get("height"))
 	coorX, _ := strconv.Atoi(queryValues.Get("coordenadasX"))
 	coorY, _ := strconv.Atoi(queryValues.Get("coordenadasY"))
+
 	client := &Client{clientID: "test",
 		config: deviceConfiguration{height, width, image.Point{coorX, coorY}},
 		socket: conn, isConnected: true, graphicID: 1, prossPic: make(chan image.Image), send: make(chan []byte)}
@@ -152,9 +170,10 @@ func (c *Client) processPic() {
 				c.socket.WriteMessage(websocket.CloseMessage, []byte{})
 				return
 			}
-
-			//manager.picBroadcast <- c.getByteCastPicture(&picture)
-			c.send <- c.getByteCastPicture(&picture)
+			var clientPicMap = make(map[*Client][]byte)
+			clientPicMap[c] = c.getByteCastPicture(&picture)
+			manager.picBroadcast <- clientPicMap
+			//c.send <- c.getByteCastPicture(&picture)
 			//c.socket.WriteMessage(websocket.TextMessage, c.getByteCastPicture(picture))
 		}
 	}
@@ -193,31 +212,19 @@ func (c *Client) getByteCastPicture(originalPic *image.Image) []byte {
 
 func (c *Client) getChunkImageForClient(originImage *image.Image) image.Image {
 
-	fimg, err := os.Open("img/imagen.jpg")
+	//fimg, err := os.Open("img/imagen.jpg")
 
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "%s: %v\n", "error to load file ", err)
 
-	}
-
-	defer fimg.Close()
-
-	imgReal, _, err := image.Decode(fimg)
-
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "%s: %v\n", "error to decode file "+fimg.Name(), err)
-
-	}
 
 	//bounds := imgReal.Bounds()
 	chunkWidth := c.config.ResolutionWidth
 	chunkHeight := c.config.ResolutionHeight
-	fmt.Printf("%v\n%v\n",  chunkWidth,chunkHeight)
+	fmt.Printf("%v\n%v\n cantidad de clientes conectados", len(manager.clients)  )
 
 	//rec := imgReal.Bounds()
 	m0 := image.NewRGBA(image.Rect(0, 0, chunkWidth, chunkHeight))
 	//draw.Draw(m0, image.Rect(0, 0, rec.Max.X, rec.Max.Y), imgReal, c.config.Coordinate, draw.Src)
-	draw.Draw(m0, image.Rect(0, 0, 7680, 4800), imgReal, c.config.Coordinate, draw.Src)
+	draw.Draw(m0, image.Rect(0, 0, 7680, 4800), *originImage, c.config.Coordinate, draw.Src)
 
 	//m1 := m0.SubImage(image.Rect(0, 0, chunkWidth, chunkHeight)).(*image.RGBA)
 
@@ -247,6 +254,19 @@ func loadImg(w http.ResponseWriter, r *http.Request) {
 	if err := jpeg.Encode(buffer, imgReal, nil); err != nil {
 		log.Println("unable to encode image.")
 	}
+
+	manager.picBroadcast = make(chan map[*Client][]byte,len(manager.clients))
+
+	go func() {
+		for {
+			for picClientMap := range manager.picBroadcast {
+				for cli, pic := range picClientMap {
+					cli.send <- pic
+
+				}
+			}
+		}
+	}()
 
 	manager.picture <- imgReal
 
