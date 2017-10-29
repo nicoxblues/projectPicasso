@@ -29,7 +29,7 @@
 <script type="text/javascript">
 
     window.onload= function(){
-        document.getElementById("subTitulo").innerHTML  += ", resolucion de pantalla local en  fullScreen = " +  window.screen.availWidth  + "X" +   window.screen.availHeight ;
+        document.getElementById("subTitulo").innerHTML  += ", resolucion de pantalla local en  fullScreen = " +  window.screen.availWidth +  "X" +   window.screen.availHeight;
 
     };
 
@@ -37,6 +37,7 @@
 
         toggleFullScreen();
 
+        var pixelRatio  = window.devicePixelRatio;
         var posX = document.querySelector('[name="xPos"]').value;
         var posY = document.querySelector('[name="yPos"]').value;
 
@@ -45,8 +46,8 @@
         mainDiv.style.display = 'none';
         var imgElement  = document.getElementById("imageElemnet");
 
-        var fullScreenHeight = window.screen.availHeight;
-        var fullScreenWidth = window.screen.availWidth;
+        var fullScreenHeight = window.screen.availHeight // * pixelRatio;
+        var fullScreenWidth = window.screen.availWidth //* pixelRatio;
 
         var url = "ws://"  + document.location.host + "/ws?height=" + fullScreenHeight + "&width=" + fullScreenWidth + "&coordenadasX=" + posX  + "&coordenadasY=" +  posY ;
 
