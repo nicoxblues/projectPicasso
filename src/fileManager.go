@@ -8,48 +8,105 @@ import (
 	"bytes"
 	"image/jpeg"
 	"image"
+
 )
 
 
+type fileHandler struct {
+	fileNameCacheList *[]string
+	currentFile int
+
+}
 
 
+type imageWrapper struct {
+	shouldResizeImage bool
+	img image.Image
+	fileList  fileHandler
 
-
+}
 
 const DirPath = "img/"
-var FileList = make([]string,0)
 
-func loadFiles () {
+func  (fh *fileHandler) getImage() (image.Image, error) {
 
-	filepath.Walk(DirPath, func(path string, info os.FileInfo, err error) error {
-		if !info.IsDir() {
-			FileList = append(FileList, info.Name())
-		}
-		return nil
-	})
+	cacheFile := *fh.fileNameCacheList
 
-	for _, fileName := range FileList {
-		println(fileName)
+	buffer := new(bytes.Buffer)
+	if fh.currentFile + 1 >  len(cacheFile) {
+		fh.currentFile = 0
 	}
+
+	fimg, _ := os.Open(DirPath + cacheFile[fh.currentFile])
+	fh.currentFile++
+	imgReal, _, _ := image.Decode(fimg)
+	if err := jpeg.Encode(buffer, imgReal, nil); err != nil {
+		log.Println("unable to encode image.")
+		return  nil , err
+	}
+
+	return imgReal , nil
+
+
+
 }
 
 
 
-func loadImgNoResize(manager *ClientManager) {
+func initManager () (*imageWrapper){
 
-	buffer := new(bytes.Buffer)
-	if currentPic + 1 >  len(FileList) {
-		currentPic = 0
+	var fileCache []string
+	wrapper :=  &imageWrapper{fileList:fileHandler{&fileCache,0}}
+
+
+
+	filepath.Walk(DirPath, func(path string, info os.FileInfo, err error) error {
+		if !info.IsDir() {
+			fileCache = append(fileCache, info.Name())
+		}
+		return nil
+	})
+
+
+	for _, fileName := range fileCache {
+		println(fileName)
 	}
 
-	fimg, _ := os.Open(DirPath + FileList[currentPic])
-	currentPic++
-	imgReal, _, _ := image.Decode(fimg)
-	if err := jpeg.Encode(buffer, imgReal, nil); err != nil {
-		log.Println("unable to encode image.")
-	}
+	return wrapper
 
+
+
+
+}
+
+
+
+
+func ( wrapper *imageWrapper) loadImg(manager *ClientHandler)  {
+
+	imgReal, err := wrapper.fileList.getImage()
 	log.Println("foto en size real " , imgReal.Bounds().Max.X, imgReal.Bounds().Max.Y)
+	if (err == nil){
+
+	}
+
+	var resizeResolutionX uint
+	var resizeResolutionY uint
+
+
+	if wrapper.shouldResizeImage {
+
+		for client := range manager.clients {
+			resizeResolutionX += uint(client.config.ResolutionWidth)
+			if resizeResolutionY < uint(client.config.Coordinate.Y) {
+				resizeResolutionY = uint(client.config.Coordinate.Y + client.config.ResolutionHeight)
+			}
+		}
+
+		imgReal = resize.Resize(resizeResolutionX, resizeResolutionY, imgReal, resize.Lanczos3)
+
+		log.Println("foto resaizada a ", resizeResolutionX, resizeResolutionY)
+	}
 
 	manager.picBroadcast = make(chan map[*Client][]byte,len(manager.clients))
 
@@ -67,47 +124,10 @@ func loadImgNoResize(manager *ClientManager) {
 
 }
 
-func loadImg(manager *ClientManager) {
-
-	buffer := new(bytes.Buffer)
-	if currentPic + 1 >  len(FileList) {
-		currentPic = 0
-	}
-
-	fimg, _ := os.Open(DirPath + FileList[currentPic])
-	currentPic++
-	imgReal, _, _ := image.Decode(fimg)
-	if err := jpeg.Encode(buffer, imgReal, nil); err != nil {
-		log.Println("unable to encode image.")
-	}
-
-	var resizedResolutionX uint
-	var resizedResolutionY uint
-
-	for client := range manager.clients{
-		resizedResolutionX += uint (client.config.ResolutionWidth)
-		if resizedResolutionY <  uint(client.config.Coordinate.Y) {
-			resizedResolutionY = uint(client.config.Coordinate.Y + client.config.ResolutionHeight)
-		}
-	}
 
 
-	m := resize.Resize(resizedResolutionX, resizedResolutionY , imgReal, resize.Lanczos3)
 
-	log.Println("foto resaizada a " , resizedResolutionX, resizedResolutionY  )
 
-	manager.picBroadcast = make(chan map[*Client][]byte,len(manager.clients))
 
-	go func() {
-		for picClientMap := range manager.picBroadcast {
-			for cli, pic := range picClientMap {
-				cli.send <- pic
 
-			}
-		}
 
-	}()
-
-	manager.picture <- m
-
-}

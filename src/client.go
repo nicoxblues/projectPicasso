@@ -25,18 +25,17 @@ type Client struct {
 	socket      *websocket.Conn
 	clientID    string
 	config      deviceConfiguration
-	isConnected bool
 	send        chan []byte
 	prossPic    chan image.Image
 	sendPic     chan []byte
 	graphicID   int
-	manager *ClientManager
+	manager *ClientHandler
 }
 
 
 
 
-func wsHandler(manager *ClientManager , w http.ResponseWriter  , r *http.Request) {
+func wsHandler(manager *ClientHandler, w http.ResponseWriter  , r *http.Request) {
 
 	if r.Header.Get("Origin") != "http://"+r.Host {
 		http.Error(w, "Origin not allowed", 403)
@@ -58,7 +57,7 @@ func wsHandler(manager *ClientManager , w http.ResponseWriter  , r *http.Request
 
 	client := &Client{clientID: "test",
 		config: deviceConfiguration{height, width, image.Point{coorX, coorY}},
-		socket: conn, isConnected: true, graphicID: 1, prossPic: make(chan image.Image), send: make(chan []byte),manager:manager}
+		socket: conn,  graphicID: 1, prossPic: make(chan image.Image), send: make(chan []byte),manager:manager}
 
 	//manager.register <- client
 

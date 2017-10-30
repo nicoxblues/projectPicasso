@@ -6,7 +6,7 @@ import (
 )
 
 
-type ClientManager struct {
+type ClientHandler struct {
 	clients      map[*Client]bool
 	picture      chan image.Image
 	broadcast    chan []byte
@@ -17,8 +17,8 @@ type ClientManager struct {
 
 }
 
-func newManager() *ClientManager {
-	return &ClientManager{
+func newClientHandler() *ClientHandler {
+	return &ClientHandler{
 		picture:      make(chan image.Image),
 		broadcast:    make(chan []byte),
 		register:     make(chan *Client),
@@ -28,14 +28,14 @@ func newManager() *ClientManager {
 }
 
 
-func (manager *ClientManager) send(message []byte) {
+func (manager *ClientHandler) send(message []byte) {
 	for conn := range manager.clients {
 		conn.send <- message
 
 	}
 }
 
-func (manager *ClientManager) start() {
+func (manager *ClientHandler) start() {
 
 
 	for {

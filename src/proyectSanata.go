@@ -16,27 +16,30 @@ type deviceConfiguration struct {
 
 
 
-var currentPic = 0
+
 
 func main() {
 
-	loadFiles()
+
+	imgWrapper := initManager()
 
 	fs := http.FileServer(http.Dir("static/"))
 	http.Handle("/", fs)
-	manager := newManager()
+	clientHandler := newClientHandler()
 
-	go manager.start()
+	go clientHandler.start()
 
 	http.HandleFunc("/ws", func(writer http.ResponseWriter, request *http.Request) {
-		wsHandler(manager,writer,request)
+		wsHandler(clientHandler,writer,request)
 	})
 
 	http.HandleFunc("/loadImage", func(writer http.ResponseWriter, request *http.Request) {
-		loadImg(manager)
+		imgWrapper.shouldResizeImage = true
+		imgWrapper.loadImg(clientHandler)
 	})
 	http.HandleFunc("/loadImage2", func(writer http.ResponseWriter, request *http.Request) {
-		loadImgNoResize(manager)
+		imgWrapper.shouldResizeImage = false
+		imgWrapper.loadImg(clientHandler)
 	})
 
 
