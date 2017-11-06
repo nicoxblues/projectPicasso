@@ -1,10 +1,8 @@
 package main
 
 import (
-
 	"image"
 )
-
 
 type ClientHandler struct {
 	clients      map[*Client]bool
@@ -13,20 +11,17 @@ type ClientHandler struct {
 	register     chan *Client
 	unregister   chan *Client
 	picBroadcast chan map[*Client][]byte
-
-
 }
 
 func newClientHandler() *ClientHandler {
 	return &ClientHandler{
-		picture:      make(chan image.Image),
-		broadcast:    make(chan []byte),
-		register:     make(chan *Client),
-		unregister:   make(chan *Client),
-		clients:      make(map[*Client]bool),
-		}
+		picture:    make(chan image.Image),
+		broadcast:  make(chan []byte),
+		register:   make(chan *Client),
+		unregister: make(chan *Client),
+		clients:    make(map[*Client]bool),
+	}
 }
-
 
 func (manager *ClientHandler) send(message []byte) {
 	for conn := range manager.clients {
@@ -36,7 +31,6 @@ func (manager *ClientHandler) send(message []byte) {
 }
 
 func (manager *ClientHandler) start() {
-
 
 	for {
 		select {
@@ -55,7 +49,6 @@ func (manager *ClientHandler) start() {
 			for client := range manager.clients {
 				client.prossPic <- pic
 			}
-
 
 		}
 

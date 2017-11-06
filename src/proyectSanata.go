@@ -4,7 +4,6 @@ import (
 	"image"
 	"log"
 	"net/http"
-
 )
 
 type deviceConfiguration struct {
@@ -14,12 +13,7 @@ type deviceConfiguration struct {
 	Coordinate image.Point
 }
 
-
-
-
-
 func main() {
-
 
 	imgWrapper := initManager()
 
@@ -30,7 +24,7 @@ func main() {
 	go clientHandler.start()
 
 	http.HandleFunc("/ws", func(writer http.ResponseWriter, request *http.Request) {
-		wsHandler(clientHandler,writer,request)
+		wsHandler(clientHandler, writer, request)
 	})
 
 	http.HandleFunc("/loadImage", func(writer http.ResponseWriter, request *http.Request) {
@@ -41,8 +35,6 @@ func main() {
 		imgWrapper.shouldResizeImage = false
 		imgWrapper.loadImg(clientHandler)
 	})
-
-
 
 	err := http.ListenAndServe(":8080", nil) // set listen port
 	if err == nil {

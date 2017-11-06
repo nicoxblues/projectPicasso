@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<data>
+   <chartConfig name='Personas' title='inserte algo interesante aqui ! :D' type='Pie'>
+      <Columns>
+         <element>
+            <colName>variable1</colName>
+            <colType>string</colType>
+         </element>
+         <element>
+            <colName>value</colName>
+            <colType>number</colType>
+         </element>
+      </Columns>
+      <rows>
+         <element>
+            <rowName>test</rowName>
+            <rowValue>500</rowValue>
+         </element>
+         <element>
+            <rowName>testII</rowName>
+            <rowValue>500</rowValue>
+         </element>
+      </rows>
+   </chartConfig>
+   <chartConfig name='otracosa' title='otra cosa que insertr ! :D' type='bar'>
+   		<Columns>
+		     <element>
+		        <colName>variable2</colName>
+		        <colType>string</colType>
+		     </element>
+		     <element>
+		        <colName>value2</colName>
+		        <colType>number</colType>
+		     </element>
+  		</Columns>
+  		<rows>
+		     <element>
+		        <rowName>test</rowName>
+		        <rowValue>500</rowValue>
+		     </element>
+		     <element>
+		        <rowName>testII</rowName>
+		        <rowValue>500</rowValue>
+		     </element>
+  		</rows>
+  		
+	</chartConfig>
+</data>

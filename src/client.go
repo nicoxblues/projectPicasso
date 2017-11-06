@@ -1,41 +1,35 @@
 package main
 
 import (
-
+	"bytes"
+	"encoding/base64"
+	"fmt"
+	"github.com/gorilla/websocket"
 	"image"
+	"image/draw"
 	"image/jpeg"
 	"log"
 	"net/http"
 	"strconv"
-	"github.com/gorilla/websocket"
-	"fmt"
-	"image/draw"
-	"bytes"
-	"encoding/base64"
 )
-
 
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
 }
 
-
 type Client struct {
-	socket      *websocket.Conn
-	clientID    string
-	config      deviceConfiguration
-	send        chan []byte
-	prossPic    chan image.Image
-	sendPic     chan []byte
-	graphicID   int
-	manager *ClientHandler
+	socket    *websocket.Conn
+	clientID  string
+	config    deviceConfiguration
+	send      chan []byte
+	prossPic  chan image.Image
+	sendPic   chan []byte
+	graphicID int
+	manager   *ClientHandler
 }
 
-
-
-
-func wsHandler(manager *ClientHandler, w http.ResponseWriter  , r *http.Request) {
+func wsHandler(manager *ClientHandler, w http.ResponseWriter, r *http.Request) {
 
 	if r.Header.Get("Origin") != "http://"+r.Host {
 		http.Error(w, "Origin not allowed", 403)
@@ -57,7 +51,7 @@ func wsHandler(manager *ClientHandler, w http.ResponseWriter  , r *http.Request)
 
 	client := &Client{clientID: "test",
 		config: deviceConfiguration{height, width, image.Point{coorX, coorY}},
-		socket: conn,  graphicID: 1, prossPic: make(chan image.Image), send: make(chan []byte),manager:manager}
+		socket: conn, graphicID: 1, prossPic: make(chan image.Image), send: make(chan []byte), manager: manager}
 
 	//manager.register <- client
 
@@ -66,8 +60,6 @@ func wsHandler(manager *ClientHandler, w http.ResponseWriter  , r *http.Request)
 	go client.processPic()
 	go client.read()
 	go client.write()
-
-
 
 }
 
@@ -128,10 +120,6 @@ func (c *Client) read() {
 			break
 		}
 
-
-
-
-
 	}
 
 }
@@ -157,7 +145,6 @@ func (c *Client) getChunkImageForClient(originImage *image.Image) image.Image {
 	return m0 //resize.Resize(uint(chunkWidth), uint(chunkHeight),m0,resize.Lanczos3)
 }
 
-
 func getEncodeImage(image image.Image) string {
 
 	buffer := new(bytes.Buffer)
@@ -172,4 +159,3 @@ func getEncodeImage(image image.Image) string {
 	return encodedString
 
 }
-

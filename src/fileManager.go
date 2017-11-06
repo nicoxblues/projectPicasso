@@ -1,39 +1,34 @@
 package main
 
 import (
+	"bytes"
+	"github.com/nfnt/resize"
+	"image"
+	"image/jpeg"
+	"log"
 	"os"
 	"path/filepath"
-	"github.com/nfnt/resize"
-	"log"
-	"bytes"
-	"image/jpeg"
-	"image"
-
 )
-
 
 type fileHandler struct {
 	fileNameCacheList *[]string
-	currentFile int
-
+	currentFile       int
 }
-
 
 type imageWrapper struct {
 	shouldResizeImage bool
-	img image.Image
-	fileList  fileHandler
-
+	img               image.Image
+	fileList          fileHandler
 }
 
 const DirPath = "img/"
 
-func  (fh *fileHandler) getImage() (image.Image, error) {
+func (fh *fileHandler) getImage() (image.Image, error) {
 
 	cacheFile := *fh.fileNameCacheList
 
 	buffer := new(bytes.Buffer)
-	if fh.currentFile + 1 >  len(cacheFile) {
+	if fh.currentFile+1 > len(cacheFile) {
 		fh.currentFile = 0
 	}
 
@@ -42,23 +37,17 @@ func  (fh *fileHandler) getImage() (image.Image, error) {
 	imgReal, _, _ := image.Decode(fimg)
 	if err := jpeg.Encode(buffer, imgReal, nil); err != nil {
 		log.Println("unable to encode image.")
-		return  nil , err
+		return nil, err
 	}
 
-	return imgReal , nil
-
-
+	return imgReal, nil
 
 }
 
-
-
-func initManager () (*imageWrapper){
+func initManager() *imageWrapper {
 
 	var fileCache []string
-	wrapper :=  &imageWrapper{fileList:fileHandler{&fileCache,0}}
-
-
+	wrapper := &imageWrapper{fileList: fileHandler{&fileCache, 0}}
 
 	filepath.Walk(DirPath, func(path string, info os.FileInfo, err error) error {
 		if !info.IsDir() {
@@ -67,32 +56,24 @@ func initManager () (*imageWrapper){
 		return nil
 	})
 
-
 	for _, fileName := range fileCache {
 		println(fileName)
 	}
 
 	return wrapper
 
-
-
-
 }
 
-
-
-
-func ( wrapper *imageWrapper) loadImg(manager *ClientHandler)  {
+func (wrapper *imageWrapper) loadImg(manager *ClientHandler) {
 
 	imgReal, err := wrapper.fileList.getImage()
-	log.Println("foto en size real " , imgReal.Bounds().Max.X, imgReal.Bounds().Max.Y)
-	if (err == nil){
+	log.Println("foto en size real ", imgReal.Bounds().Max.X, imgReal.Bounds().Max.Y)
+	if err == nil {
 
 	}
 
 	var resizeResolutionX uint
 	var resizeResolutionY uint
-
 
 	if wrapper.shouldResizeImage {
 
@@ -101,6 +82,9 @@ func ( wrapper *imageWrapper) loadImg(manager *ClientHandler)  {
 			if resizeResolutionY < uint(client.config.Coordinate.Y) {
 				resizeResolutionY = uint(client.config.Coordinate.Y + client.config.ResolutionHeight)
 			}
+			if resizeResolutionY == 0{
+				resizeResolutionY = uint(client.config.ResolutionHeight);
+			}
 		}
 
 		imgReal = resize.Resize(resizeResolutionX, resizeResolutionY, imgReal, resize.Lanczos3)
@@ -108,7 +92,7 @@ func ( wrapper *imageWrapper) loadImg(manager *ClientHandler)  {
 		log.Println("foto resaizada a ", resizeResolutionX, resizeResolutionY)
 	}
 
-	manager.picBroadcast = make(chan map[*Client][]byte,len(manager.clients))
+	manager.picBroadcast = make(chan map[*Client][]byte, len(manager.clients))
 
 	go func() {
 		for picClientMap := range manager.picBroadcast {
@@ -123,11 +107,3 @@ func ( wrapper *imageWrapper) loadImg(manager *ClientHandler)  {
 	manager.picture <- imgReal
 
 }
-
-
-
-
-
-
-
-
