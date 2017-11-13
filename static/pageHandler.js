@@ -4,7 +4,8 @@ window.onload= function(){
 };
 
 function sendData(){
-    chartHandler();
+
+    var chHandler =  new chartHandler();
 
     toggleFullScreen();
 
@@ -42,9 +43,28 @@ function sendData(){
             console.log("mensaje");
             //toggleFullScreen();
             var data = e.data;
-            imgElement.setAttribute("src","data:image/jpg;base64," + data);
-            ChartElement.style.display = 'none';
-            imgElement.style.display = 'block';
+            try{
+                chHandler.jsonData =  JSON.parse (data);
+                if (chHandler._googleChart) {
+                    chHandler.fillData();
+                    chHandler.draw();
+                }
+
+            }catch(ex){
+                if (data.indexOf("Charts") !== -1) {
+                    imgElement.setAttribute("src", "data:image/jpg;base64,");
+                    ChartElement.style.display = 'block';
+                    imgElement.style.display = 'none';
+
+                } else {
+                    imgElement.setAttribute("src", "data:image/jpg;base64," + data);
+                    ChartElement.style.display = 'none';
+                    imgElement.style.display = 'block';
+                }
+
+
+            }
+
         };
 
         socket.onclose = function () {
@@ -60,126 +80,83 @@ function sendData(){
 
 function chartHandler(){
 
-    // Load the Visualization API and the corechart package.
-    google.charts.load('current', {'packages':['corechart']});
-
-    // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(drawChart);
-
-    var jsonChartData ={
-        "chartConfig": {
-            "chart":
-                {
-                    "-type": "pie",
-                    "-name": "Personas",
-                    "-title": "inserte algo interesante aqui ! :D",
-                    "Columns":
-                        [
-                            {
-                                "colType": "string",
-                                "colName": "variable1"
-                            },
-                            {
-                                "colType": "number",
-                                "colName": "value"
-                            }
-                        ],
-                    "rows":
-                        [
-                            {
-                                "rowName": "test",
-                                "rowValue": 500
-                            },
-                            {
-                                "rowName": "testII",
-                                "rowValue": 500
-                            }
-                        ]
-                }
-        }
-
-
-    };
-
-
-    // Callback that creates and populates a data table,
-    // instantiates the pie chart, passes in the data and
-    // draws it.
-    function drawChart() {
-
-        gooleChart = [];
-        gooleChart['pie'] = google.visualization.PieChart;
-        gooleChart['bar'] = google.visualization.BarChart;
-        gooleChart['Column'] = google.visualization.ColumnChart;
+    this.gooleChart = [];
+    var self = this;
+    this.drawChart = function(){
+        self.gooleChart['pie'] = google.visualization.PieChart;
+        self.gooleChart['bar'] = google.visualization.BarChart;
+        self.gooleChart['Column'] = google.visualization.ColumnChart;
 
 
         // Create the data table.
-        var data = new google.visualization.DataTable();
-
-        data.addColumn('string', 'N');
-        data.addColumn('number', 'Value');
 
 
-
-        data.addRow(['V', 300]);
-        data.addRow(['C', 100]);
-
-        // Set chart options
-        var options = {'title':'titulo del grafico, no se , algo! ',
-            'width': window.screen.availWidth,
-            'height':window.screen.availHeight,
-
-
-            	animation:{
-                    duration: 1000,
-                    easing: 'out',},
-            vAxis: {minValue:0, maxValue:700}
-        };
-
-
-
-        /*var button = document.getElementById('b1');
-
-                      // Disabling the button while the chart is drawing.
-      button.disabled = true;
-      google.visualization.events.addListener(chart, 'ready',
-          function() {
-            button.disabled = false;
-          });*/
-
-
-
-
+        self.fillData();
 
         // Instantiate and draw our chart, passing in some options.
         var chartDiv = document.getElementById('chart_div');
 
-        var chart = new  gooleChart['Column'](chartDiv);
-        chart.draw(data, options);
+        self._googleChart = new self.gooleChart[self.jsonData.type](chartDiv);
 
 
-        chartDiv.onclick =  function() {
-            data = new google.visualization.DataTable();
-            var columns = jsonChartData.chartConfig.chart.Columns;
-            for (i = 0; i < columns.length; i++){
-                data.addColumn(columns[i].colType, columns[i].colName);
-            }
-            var rows = jsonChartData.chartConfig.chart.rows;
+        self._googleChart.draw(self.data, self.option);
 
-            for (i = 0; i < rows.length; i++){
-                data.addRow([rows[i].rowName,rows[i].rowValue]) //data.addRow(['V', 500]);
-
-            }
-            //data.addColumn('number', 'Value');
+    };
 
 
-            chart.draw(data, options);
-        }
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(this.drawChart);
+
+
+
+
+};
+
+chartHandler.prototype.draw = function () {
+    if (this._googleChart)
+        this._googleChart.draw(this.data, this.option);
+
+};
+
+chartHandler.prototype.fillData = function (jsonData) {
+
+
+    this.data = new google.visualization.DataTable();
+    var columns  = this.jsonData.columns;
+
+    for ( var i = 0; i < columns.length; i++){
+        this.data.addColumn(columns[i].colType, columns[i].colName);
 
 
 
     }
-}
+
+    this.data.addRow([columns[0].colName, parseInt(this.jsonData.rows[0].rowValue)]);
+    this.data.addRow([columns[1].colName, parseInt(this.jsonData.rows[1].rowValue)]);
+
+
+
+
+    // Set chart options
+    var options = {'title':this.jsonData.title,
+        'width': window.screen.availWidth,
+        'height':window.screen.availHeight,
+
+
+        animation:{
+            duration: 1000,
+            easing: 'out'},
+        vAxis: {minValue:0, maxValue:700}
+    };
+
+    this.option = options
+
+};
+
+
 
 function toggleFullScreen() {
     var doc = window.document;

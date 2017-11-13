@@ -4,6 +4,7 @@ import (
 	"image"
 	"log"
 	"net/http"
+
 )
 
 type deviceConfiguration struct {
@@ -35,6 +36,20 @@ func main() {
 		imgWrapper.shouldResizeImage = false
 		imgWrapper.loadImg(clientHandler)
 	})
+	http.HandleFunc("/showChart", func(writer http.ResponseWriter, request *http.Request) {
+		clientHandler.showCharts()
+	})
+
+	http.HandleFunc("/manager", func(w http.ResponseWriter, request *http.Request) {
+			mainPageLoader(w,clientHandler)
+		})
+
+	http.HandleFunc("/update", func(w http.ResponseWriter, request *http.Request) {
+		updateChart("personas",clientHandler)
+	})
+
+
+
 
 	err := http.ListenAndServe(":8080", nil) // set listen port
 	if err == nil {

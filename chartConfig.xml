@@ -1,15 +1,24 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <data>
-   <chartConfig name='Personas' title='inserte algo interesante aqui ! :D' type='Pie'>
+   <chartConfig name='Personas' title='inserte algo interesante aqui ! :D' type='pie' id="personas" svgRoot="/svg/zapato.svg">
+
+       <rangeValues>
+           <minValue>0</minValue>
+           <maxValue>500</maxValue>
+       </rangeValues>
       <Columns>
-         <element>
-            <colName>variable1</colName>
-            <colType>string</colType>
-         </element>
-         <element>
-            <colName>value</colName>
-            <colType>number</colType>
-         </element>
+
+
+          <element>
+              <colName>variable 1 del grafico</colName>
+              <colType>string</colType>
+          </element>
+
+          <element>
+              <colName>otra variable</colName>
+              <colType>number</colType>
+          </element>
+
       </Columns>
       <rows>
          <element>
@@ -22,14 +31,16 @@
          </element>
       </rows>
    </chartConfig>
-   <chartConfig name='otracosa' title='otra cosa que insertr ! :D' type='bar'>
+
+
+   <chartConfig name='otracosa' title='otra cosa que insertr ! :D' type='bar' id="otroMas" svgRoot="">
    		<Columns>
 		     <element>
-		        <colName>variable2</colName>
+		        <colName>variable1</colName>
 		        <colType>string</colType>
 		     </element>
 		     <element>
-		        <colName>value2</colName>
+		        <colName>variable2</colName>
 		        <colType>number</colType>
 		     </element>
   		</Columns>
@@ -45,4 +56,7 @@
   		</rows>
   		
 	</chartConfig>
+
+
+
 </data>

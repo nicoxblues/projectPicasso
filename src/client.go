@@ -20,14 +20,16 @@ var upgrader = websocket.Upgrader{
 
 type Client struct {
 	socket    *websocket.Conn
-	clientID  string
+	clientID   string
 	config    deviceConfiguration
 	send      chan []byte
 	prossPic  chan image.Image
 	sendPic   chan []byte
-	graphicID int
+	clientChart *chartConfig
 	manager   *ClientHandler
 }
+
+
 
 func wsHandler(manager *ClientHandler, w http.ResponseWriter, r *http.Request) {
 
@@ -49,13 +51,17 @@ func wsHandler(manager *ClientHandler, w http.ResponseWriter, r *http.Request) {
 	coorX, _ := strconv.Atoi(queryValues.Get("coordenadasX"))
 	coorY, _ := strconv.Atoi(queryValues.Get("coordenadasY"))
 
-	client := &Client{clientID: "test",
+
+
+	client := &Client{
 		config: deviceConfiguration{height, width, image.Point{coorX, coorY}},
-		socket: conn, graphicID: 1, prossPic: make(chan image.Image), send: make(chan []byte), manager: manager}
+		socket: conn,  prossPic: make(chan image.Image), send: make(chan []byte), manager: manager}
 
-	//manager.register <- client
+	client.loadClintConfig()
 
+	client.manager.charConf[client.clientChart.ChartID] = client.clientChart
 	client.manager.register <- client
+	conn.WriteJSON(client.clientChart)
 
 	go client.processPic()
 	go client.read()
@@ -145,6 +151,15 @@ func (c *Client) getChunkImageForClient(originImage *image.Image) image.Image {
 	return m0 //resize.Resize(uint(chunkWidth), uint(chunkHeight),m0,resize.Lanczos3)
 }
 
+func (c *Client) loadClintConfig() {
+	if c.clientChart == nil {
+		c.clientChart  = c.manager.serverConf.nextChart()
+		c.clientID= c.clientChart.ChartID
+	}
+
+
+}
+
 func getEncodeImage(image image.Image) string {
 
 	buffer := new(bytes.Buffer)
@@ -159,3 +174,5 @@ func getEncodeImage(image image.Image) string {
 	return encodedString
 
 }
+
+
