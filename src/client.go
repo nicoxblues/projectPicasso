@@ -11,6 +11,8 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+
+
 )
 
 var upgrader = websocket.Upgrader{
@@ -34,7 +36,7 @@ type Client struct {
 func wsHandler(manager *ClientHandler, w http.ResponseWriter, r *http.Request) {
 
 	if r.Header.Get("Origin") != "http://"+r.Host {
-		http.Error(w, "Origin not allowed", 403)
+		http.Error(w, "oh no ! :(", 403)
 		return
 	}
 
@@ -60,8 +62,11 @@ func wsHandler(manager *ClientHandler, w http.ResponseWriter, r *http.Request) {
 	client.loadClintConfig()
 
 	client.manager.charConf[client.clientChart.ChartID] = client.clientChart
+
+
 	client.manager.register <- client
-	conn.WriteJSON(client.clientChart)
+	//conn.WriteJSON(client.clientChart)
+	conn.WriteMessage(websocket.TextMessage,[]byte(client.clientChart.HtmlDivRoot))
 
 	go client.processPic()
 	go client.read()

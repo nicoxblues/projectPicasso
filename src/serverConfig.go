@@ -30,6 +30,7 @@ type chartConfig struct {
 	Title   string          `xml:"title,attr" json:"title"`
 	Type    string          `xml:"type,attr" json:"type"`
 	SvgRoot string          `xml:"svgRoot,attr" json:"svgRoot"`
+	HtmlDivRoot string      `xml:"htmlDivRoot,attr" json:"htmlDiv"`
 	Columns [] *chartColumn `xml:"Columns>element" json:"columns"`
 	Rows    []  *chartRow   `xml:"rows>element" json:"rows"`
 }

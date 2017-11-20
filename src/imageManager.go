@@ -90,8 +90,9 @@ func (wrapper *imageWrapper) loadImg(manager *ClientHandler) {
 		imgReal = resize.Resize(resizeResolutionX, resizeResolutionY, imgReal, resize.Lanczos3)
 
 		log.Println("foto resaizada a ", resizeResolutionX, resizeResolutionY)
+	}else {
+		imgReal = resize.Resize(3840, 2160, imgReal, resize.Lanczos3)
 	}
-
 	manager.picBroadcast = make(chan map[*Client][]byte, len(manager.clients))
 
 	go func() {
