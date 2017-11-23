@@ -49,12 +49,14 @@ function sendData(){
 
             if (firstLoad) {
 
+                setTimeout(function(){
 
-                ChartElement.setAttribute("src", data) ;
-                ChartElement.style.display = 'block';
+                    ChartElement.setAttribute("src", data) ;
+                    ChartElement.style.display = 'block';
 
-                imgElement.style.display = 'none';
-                firstLoad = false;
+                    imgElement.style.display = 'none';
+                    firstLoad = false;},300)
+
 
             }else if (data.indexOf("Charts") !== -1) {
                 imgElement.setAttribute("src", "data:image/jpg;base64,");
