@@ -43,7 +43,7 @@ func (manager *ClientHandler) send(message []byte) {
 
 func (manager *ClientHandler) showCharts(){
 	for client := range manager.clients {
-		client.send <- []byte("showCharts");
+		client.send <- []byte("showCharts")
 	}
 
 

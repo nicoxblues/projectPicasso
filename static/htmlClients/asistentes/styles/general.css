@@ -1,0 +1,511 @@
+* {
+    outline: none;
+}
+
+html {
+    margin: 0px;
+    font-family: Arial, Verdana, sans-serif;
+    height: 100%;
+}
+
+body {
+    padding: 60px 50px 50px 50px;
+    margin: 0;
+    box-sizing: border-box;
+    height: 100%;
+    background-color: #179dba;
+    background-color: #273347;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+a {
+    text-decoration: none;
+    color: #0072e6;
+}
+
+h1, h2, ul, p {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+
+
+#assistant #flash{
+    background: url(img/flash.png) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 0;
+    /*     opacity: 0; */
+}
+
+
+
+#assistant #photo1{
+    background: url(img/assistant_01.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    /*     display: none; */
+}
+
+#assistant #photo1f{
+    background: url(img/assistant_01f.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    display: none;
+}
+
+#assistant #photo2{
+    background: url(img/assistant_02.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    display: none;
+}
+
+#assistant #photo2f{
+    background: url(img/assistant_02f.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    display: none;
+}
+
+
+#assistant #photo3{
+    background: url(img/assistant_03.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    display: none;
+}
+
+#assistant #photo3f{
+    background: url(img/assistant_03f.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    display: none;
+}
+
+
+#assistant #photo4{
+    background: url(img/assistant_04.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    display: none;
+}
+
+#assistant #photo4f{
+    background: url(img/assistant_04f.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    display: none;
+}
+
+#assistant #photo5{
+    background: url(img/assistant_05.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    display: none;
+}
+
+#assistant #photo5f{
+    background: url(img/assistant_05f.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    display: none;
+}
+
+#assistant #photo6{
+    background: url(img/assistant_06.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    display: none;
+}
+
+#assistant #photo6f{
+    background: url(img/assistant_06f.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    display: none;
+}
+
+#assistant #photo7{
+    background: url(img/assistant_07.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    display: none;
+}
+
+#assistant #photo7f{
+    background: url(img/assistant_07f.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    display: none;
+}
+
+
+#wrapper {
+    display: flex;
+    flex: 1;
+    width: 100%;
+/*     background: red; */
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#wrapper #wrapperGraphs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+}
+
+
+#wrapper #graphs{
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex: 1;
+    padding-right: 10px;
+    box-sizing: border-box;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    align-items: flex-end;
+}
+
+#assistant {/*     background-color: rgba(0,0,0,0.4); */height: 100%;width: 31%;position: relative;}
+
+#bar {
+    background-color: rgba(0,0,0,0.4);
+    background-color: #fc636b;
+    height: 50px;
+    width: 33%;
+    position: relative;
+}
+#bar div{
+    background-color: rgba(0,0,0,0.4);
+    background-color: #3be8b0;
+    border-right: 3px solid #273346;
+    height: 50px;
+    width: 82%;
+    position: relative;
+}
+
+
+
+
+#sleeping {/*     background-color: rgba(0,0,0,0.4); */height: 100%;width: 30%;margin: 0 20px;box-sizing: border-box;position: relative;}
+
+#sleeping #photoS1{
+    background: url(img/sleeping_01.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+#sleeping #photoS2{
+    background: url(img/sleeping_02.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+#sleeping #photoS3{
+    background: url(img/sleeping_03.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+#sleeping #photoS4{
+    background: url(img/sleeping_04.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+#sleeping #photoS5{
+    background: url(img/sleeping_05.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+#sleeping #photoS6{
+    background: url(img/sleeping_06.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+#sleeping #photoS7{
+    background: url(img/sleeping_07.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+#sleeping #photoS8{
+    background: url(img/sleeping_08.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+#sleeping #photoS9{
+    background: url(img/sleeping_09.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+#sleeping #photoS10{
+    background: url(img/sleeping_10.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+#sleeping #photoS11{
+    background: url(img/sleeping_11.svg) no-repeat center bottom;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#wrapper #women,
+#wrapper #man{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    flex: 1;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+
+
+#wrapper #women .graph div,
+#wrapper #man .graph div{
+    flex: 1;
+    display: flex;
+    /* height: 100%; */
+    flex-direction: row;
+    align-items: flex-end;
+    background-color: #1aafd0;
+    /*     display: flex; */
+    border-left: 5px solid #179dba;
+    border-right: 5px solid #179dba;
+}
+
+#wrapper div span{
+    display: block;
+    width: 100%;
+    transition: 2s all;
+    position: relative;
+}
+
+
+#wrapper #women div span{
+    background-color: #fc636b;
+}
+#wrapper #man div span{
+    background-color: #02ceff;
+}
+
+#wrapper div span:after{
+    content: " ";
+    height: 80px;
+    width: 100%;
+    background-color: #FFF;
+    display: block;
+    position: absolute;
+    top: -80px;
+}
+
+#wrapper div #type1 span:after{
+    background: url(img/calzado_w1.svg) no-repeat center bottom;
+    background-size: 90% auto;
+}
+#wrapper div #type2 span:after{
+    background: url(img/calzado_w2.svg) no-repeat center bottom;
+    background-size: 85% auto;
+}
+#wrapper div #type3 span:after{
+    background: url(img/calzado_w3.svg) no-repeat center bottom;
+    background-size: 78% auto;
+}
+#wrapper div #type4 span:after{
+    background: url(img/calzado_w4.svg) no-repeat center bottom;
+    background-size: 80% auto;
+}
+
+
+
+#wrapper div #type5 span:after{
+    background: url(img/calzado_m1.svg) no-repeat center bottom;
+    background-size: 90% auto;
+}
+#wrapper div #type6 span:after{
+    background: url(img/calzado_m2.svg) no-repeat center bottom;
+    background-size: 90% auto;
+}
+#wrapper div #type7 span:after{
+    background: url(img/calzado_m3.svg) no-repeat center bottom;
+    background-size: 90% auto;
+}
+#wrapper div #type8 span:after{
+    background: url(img/calzado_m4.svg) no-repeat center bottom;
+    background-size: 83% auto;
+}
+
+
+
+
+
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    width: 25%;
+    flex-direction: column-reverse;
+    box-sizing: border-box;
+    position: relative;
+}
+
+ul:after{
+    content: "";
+    background:rgba(0, 0, 0, 0.66);
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 30%;
+    margin: 0 10px;
+    z-index: 3;
+    position: absolute;
+}
+
+
+
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-size: 100px;
+    line-height: 100px;
+    margin-top: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+}
+
+h2 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-size: 41px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 200;
+}
+
+
+
+
+#wrapper .graph div {
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-duration: 10s;
+    animation-duration: 10s;
+    -webkit-animation-name: flash;
+    animation-name: flash;
+}
+
+@keyframes flash {
+    0% { background-color: #FFF;   }
+    10% { background-color: #1aafd0; }
+}

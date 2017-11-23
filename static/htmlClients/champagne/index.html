@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Finnegans</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="styles/general.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="scripts/jquery-1.8.2.min.js"></script>
+
+	<script type="text/javascript">
+		var botellas = 0;
+		var botellasBase = 0;
+		var frame = 0;
+
+		$(document).ready(function(){
+			/* Crea 100 iconos en el gráfico */
+			for (i = 0; i < 100; i++) { 
+	    		$( "ul" ).append( "<li class='full'><span></span></li>" );
+			}
+
+			/* Define % de botellas */
+			setGraph(botellas);
+
+
+
+			setInterval(function() {
+
+				/* Define al azar si se ejecuta el timer */
+				var activacion = Math.floor((Math.random() * 1) + 1);
+				if (activacion == 1) { 
+
+					/* Define nuevo valor del gráfico */
+					botellas++;
+					if (botellas < 101) {
+						aniGraph();
+					};
+					if (botellas == 100) {
+						$('h2').text("Game Over");
+					};
+				};
+
+			/* Define pausa para vaciar botella */
+			/* 180 (total minutos) * 60 = 108000 */
+			}, 108000);
+		});
+
+		/* Define % de botellas en el gráfico */
+		function setGraph() {
+			$("ul li:lt("+botellas+")").removeClass( "full").addClass("empty");
+			$("ul li:gt("+(botellas-1)+")").removeClass( "empty").addClass("full");
+		}
+
+
+		/* vacía progresivamente la botella */
+		function aniGraph() {
+			aG = setInterval(function() {
+				console.log('aniGraph');
+
+
+				// var activacion = Math.floor((Math.random() * 3) + 1);
+				// if (activacion == 1) { 
+					frame++;
+					$("ul li:nth-child("+botellas+")").addClass("frame" + frame);
+
+					if (frame == 5) {
+						frame = 0; 
+						setGraph();
+						clearInterval(aG);
+					};
+				// };
+
+			/* Define pausa entre frames */
+			}, 10000);
+		}
+
+
+	</script>
+
+</head>
+<body>
+	<ul></ul>
+	<h1>Botellas de Champagne</h1>
+	<h2>Disponibles</h2>
+</body>
+</html>

@@ -1,0 +1,1167 @@
+* {
+    outline: none;
+}
+
+html {
+    margin: 0px;
+    font-family: Arial, Verdana, sans-serif;
+    height: 100%;
+}
+
+body {
+    padding: 50px;
+    margin: 0;
+    box-sizing: border-box;
+    height: 100%;
+    background-color: #e63b3b;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+a {
+    text-decoration: none;
+    color: #0072e6;
+}
+
+h1, h2, ul, p {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    flex-direction: row;
+}
+
+ul li{
+    width: 5%;
+/*     background-color: red; */
+    padding: 10px;
+    box-sizing: border-box;
+    height: 20%;
+}
+ul li span{
+    display: block;
+    height: 100%;
+}
+
+
+ul li.empty span{
+    background: url(img/bottle_02.svg) no-repeat center center;
+    background-size: contain;
+}
+ul li.full span{
+    background: url(img/bottle_01.svg) no-repeat center center;
+    background-size: contain;
+}
+
+
+
+ul li.full.frame1 span{
+    background: url(img/bottle_03.svg) no-repeat center center;
+    background-size: contain;
+}
+ul li.full.frame2 span{
+    background: url(img/bottle_04.svg) no-repeat center center;
+    background-size: contain;
+}
+ul li.full.frame3 span{
+    background: url(img/bottle_05.svg) no-repeat center center;
+    background-size: contain;
+}
+ul li.full.frame4 span{
+    background: url(img/bottle_06.svg) no-repeat center center;
+    background-size: contain;
+}
+ul li.full.frame5 span{
+    background: url(img/bottle_07.svg) no-repeat center center;
+    background-size: contain;
+}
+
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-size: 88px;
+    line-height: 80px;
+    margin-top: 40px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+}
+h2 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #273347;
+    font-size: 56px;
+    margin-top: 0px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 200;
+}
+
+
+@media screen and (max-width: 1200px) {
+    ul li{
+        width: 10%;
+        height: 10%;
+    }
+}
+
+*
+
+
+ul li {
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-duration: 10s;
+    animation-duration: 10s;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+
+
+ul li:nth-child(1) {
+    -webkit-animation-name: zoom-1;
+    animation-name: zoom-1;
+}
+
+ul li:nth-child(2) {
+    -webkit-animation-name: zoom-2;
+    animation-name: zoom-2;
+}
+
+ul li:nth-child(3) {
+    -webkit-animation-name: zoom-3;
+    animation-name: zoom-3;
+}
+
+ul li:nth-child(4) {
+    -webkit-animation-name: zoom-4;
+    animation-name: zoom-4;
+}
+ul li:nth-child(5) {
+    -webkit-animation-name: zoom-5;
+    animation-name: zoom-5;
+}
+ul li:nth-child(6) {
+    -webkit-animation-name: zoom-6;
+    animation-name: zoom-6;
+}
+ul li:nth-child(7) {
+    -webkit-animation-name: zoom-7;
+    animation-name: zoom-7;
+}
+ul li:nth-child(8) {
+    -webkit-animation-name: zoom-8;
+    animation-name: zoom-8;
+}
+ul li:nth-child(9) {
+    -webkit-animation-name: zoom-9;
+    animation-name: zoom-9;
+}
+ul li:nth-child(10) {
+    -webkit-animation-name: zoom-10;
+    animation-name: zoom-10;
+}
+
+
+
+@keyframes zoom-1 {
+    0% { transform: scale(1);   }
+    1% { transform: scale(1.2); }
+    3% { transform: scale(1);   }
+}
+
+@keyframes zoom-2 {
+    1% { transform: scale(1);   }
+    2% { transform: scale(1.2); }
+    4% { transform: scale(1);   }
+}
+@keyframes zoom-3 {
+    2% { transform: scale(1);   }
+    3% { transform: scale(1.2); }
+    5% { transform: scale(1);   }
+}
+@keyframes zoom-4 {
+    3% { transform: scale(1);   }
+    4% { transform: scale(1.2); }
+    6% { transform: scale(1);   }
+}
+@keyframes zoom-5 {
+    4% { transform: scale(1);   }
+    5% { transform: scale(1.2); }
+    7% { transform: scale(1);   }
+}
+@keyframes zoom-6 {
+    5% { transform: scale(1);   }
+    6% { transform: scale(1.2); }
+    8% { transform: scale(1);   }
+}
+@keyframes zoom-7 {
+    6% { transform: scale(1);   }
+    7% { transform: scale(1.2); }
+    9% { transform: scale(1);   }
+}
+@keyframes zoom-8 {
+    7% { transform: scale(1);   }
+    8% { transform: scale(1.2); }
+    10% { transform: scale(1);   }
+}
+@keyframes zoom-9 {
+    8% { transform: scale(1);   }
+    9% { transform: scale(1.2); }
+    11% { transform: scale(1);   }
+}
+@keyframes zoom-10 {
+    9% { transform: scale(1);   }
+    10% { transform: scale(1.2); }
+    12% { transform: scale(1);   }
+}
+
+
+
+
+
+
+ul li:nth-child(11) {
+    -webkit-animation-name: zoom-11;
+    animation-name: zoom-11;
+}
+
+ul li:nth-child(12) {
+    -webkit-animation-name: zoom-12;
+    animation-name: zoom-12;
+}
+
+ul li:nth-child(13) {
+    -webkit-animation-name: zoom-13;
+    animation-name: zoom-13;
+}
+
+ul li:nth-child(14) {
+    -webkit-animation-name: zoom-14;
+    animation-name: zoom-14;
+}
+ul li:nth-child(15) {
+    -webkit-animation-name: zoom-15;
+    animation-name: zoom-15;
+}
+ul li:nth-child(16) {
+    -webkit-animation-name: zoom-16;
+    animation-name: zoom-16;
+}
+ul li:nth-child(17) {
+    -webkit-animation-name: zoom-17;
+    animation-name: zoom-17;
+}
+ul li:nth-child(18) {
+    -webkit-animation-name: zoom-18;
+    animation-name: zoom-18;
+}
+ul li:nth-child(19) {
+    -webkit-animation-name: zoom-19;
+    animation-name: zoom-19;
+}
+ul li:nth-child(20) {
+    -webkit-animation-name: zoom-20;
+    animation-name: zoom-20;
+}
+
+
+
+@keyframes zoom-11 {
+    10% { transform: scale(1);   }
+    11% { transform: scale(1.2); }
+    13% { transform: scale(1);   }
+}
+
+@keyframes zoom-12 {
+    11% { transform: scale(1);   }
+    12% { transform: scale(1.2); }
+    14% { transform: scale(1);   }
+}
+@keyframes zoom-13 {
+    12% { transform: scale(1);   }
+    13% { transform: scale(1.2); }
+    15% { transform: scale(1);   }
+}
+@keyframes zoom-14 {
+    13% { transform: scale(1);   }
+    14% { transform: scale(1.2); }
+    16% { transform: scale(1);   }
+}
+@keyframes zoom-15 {
+    14% { transform: scale(1);   }
+    15% { transform: scale(1.2); }
+    17% { transform: scale(1);   }
+}
+@keyframes zoom-16 {
+    15% { transform: scale(1);   }
+    16% { transform: scale(1.2); }
+    18% { transform: scale(1);   }
+}
+@keyframes zoom-17 {
+    16% { transform: scale(1);   }
+    17% { transform: scale(1.2); }
+    19% { transform: scale(1);   }
+}
+@keyframes zoom-18 {
+    17% { transform: scale(1);   }
+    18% { transform: scale(1.2); }
+    20% { transform: scale(1);   }
+}
+@keyframes zoom-19 {
+    18% { transform: scale(1);   }
+    19% { transform: scale(1.2); }
+    21% { transform: scale(1);   }
+}
+@keyframes zoom-20 {
+    19% { transform: scale(1);   }
+    20% { transform: scale(1.2); }
+    22% { transform: scale(1);   }
+}
+
+
+
+
+
+
+
+
+ul li:nth-child(21) {
+    -webkit-animation-name: zoom-21;
+    animation-name: zoom-21;
+}
+
+ul li:nth-child(22) {
+    -webkit-animation-name: zoom-22;
+    animation-name: zoom-22;
+}
+
+ul li:nth-child(23) {
+    -webkit-animation-name: zoom-23;
+    animation-name: zoom-23;
+}
+
+ul li:nth-child(24) {
+    -webkit-animation-name: zoom-24;
+    animation-name: zoom-24;
+}
+ul li:nth-child(25) {
+    -webkit-animation-name: zoom-25;
+    animation-name: zoom-25;
+}
+ul li:nth-child(26) {
+    -webkit-animation-name: zoom-26;
+    animation-name: zoom-26;
+}
+ul li:nth-child(27) {
+    -webkit-animation-name: zoom-27;
+    animation-name: zoom-27;
+}
+ul li:nth-child(28) {
+    -webkit-animation-name: zoom-28;
+    animation-name: zoom-28;
+}
+ul li:nth-child(29) {
+    -webkit-animation-name: zoom-29;
+    animation-name: zoom-29;
+}
+ul li:nth-child(30) {
+    -webkit-animation-name: zoom-30;
+    animation-name: zoom-30;
+}
+
+
+
+@keyframes zoom-21 {
+    20% { transform: scale(1);   }
+    21% { transform: scale(1.2); }
+    23% { transform: scale(1);   }
+}
+
+@keyframes zoom-22 {
+    21% { transform: scale(1);   }
+    22% { transform: scale(1.2); }
+    24% { transform: scale(1);   }
+}
+@keyframes zoom-23 {
+    22% { transform: scale(1);   }
+    23% { transform: scale(1.2); }
+    25% { transform: scale(1);   }
+}
+@keyframes zoom-24 {
+    23% { transform: scale(1);   }
+    24% { transform: scale(1.2); }
+    26% { transform: scale(1);   }
+}
+@keyframes zoom-25 {
+    24% { transform: scale(1);   }
+    25% { transform: scale(1.2); }
+    27% { transform: scale(1);   }
+}
+@keyframes zoom-26 {
+    25% { transform: scale(1);   }
+    26% { transform: scale(1.2); }
+    28% { transform: scale(1);   }
+}
+@keyframes zoom-27 {
+    26% { transform: scale(1);   }
+    27% { transform: scale(1.2); }
+    29% { transform: scale(1);   }
+}
+@keyframes zoom-28 {
+    27% { transform: scale(1);   }
+    28% { transform: scale(1.2); }
+    30% { transform: scale(1);   }
+}
+@keyframes zoom-29 {
+    28% { transform: scale(1);   }
+    29% { transform: scale(1.2); }
+    31% { transform: scale(1);   }
+}
+@keyframes zoom-30 {
+    29% { transform: scale(1);   }
+    30% { transform: scale(1.2); }
+    32% { transform: scale(1);   }
+}
+
+
+
+
+
+
+
+
+
+ul li:nth-child(31) {
+    -webkit-animation-name: zoom-31;
+    animation-name: zoom-31;
+}
+
+ul li:nth-child(32) {
+    -webkit-animation-name: zoom-32;
+    animation-name: zoom-32;
+}
+
+ul li:nth-child(33) {
+    -webkit-animation-name: zoom-33;
+    animation-name: zoom-33;
+}
+
+ul li:nth-child(34) {
+    -webkit-animation-name: zoom-34;
+    animation-name: zoom-34;
+}
+ul li:nth-child(35) {
+    -webkit-animation-name: zoom-35;
+    animation-name: zoom-35;
+}
+ul li:nth-child(36) {
+    -webkit-animation-name: zoom-36;
+    animation-name: zoom-36;
+}
+ul li:nth-child(37) {
+    -webkit-animation-name: zoom-37;
+    animation-name: zoom-37;
+}
+ul li:nth-child(38) {
+    -webkit-animation-name: zoom-38;
+    animation-name: zoom-38;
+}
+ul li:nth-child(39) {
+    -webkit-animation-name: zoom-39;
+    animation-name: zoom-39;
+}
+ul li:nth-child(40) {
+    -webkit-animation-name: zoom-40;
+    animation-name: zoom-40;
+}
+
+
+@keyframes zoom-31 {
+    30% { transform: scale(1);   }
+    31% { transform: scale(1.2); }
+    33% { transform: scale(1);   }
+}
+
+@keyframes zoom-32 {
+    31% { transform: scale(1);   }
+    32% { transform: scale(1.2); }
+    34% { transform: scale(1);   }
+}
+@keyframes zoom-33 {
+    32% { transform: scale(1);   }
+    33% { transform: scale(1.2); }
+    35% { transform: scale(1);   }
+}
+@keyframes zoom-34 {
+    33% { transform: scale(1);   }
+    34% { transform: scale(1.2); }
+    36% { transform: scale(1);   }
+}
+@keyframes zoom-35 {
+    34% { transform: scale(1);   }
+    35% { transform: scale(1.2); }
+    37% { transform: scale(1);   }
+}
+@keyframes zoom-36 {
+    35% { transform: scale(1);   }
+    36% { transform: scale(1.2); }
+    38% { transform: scale(1);   }
+}
+@keyframes zoom-37 {
+    36% { transform: scale(1);   }
+    37% { transform: scale(1.2); }
+    39% { transform: scale(1);   }
+}
+@keyframes zoom-38 {
+    37% { transform: scale(1);   }
+    38% { transform: scale(1.2); }
+    40% { transform: scale(1);   }
+}
+@keyframes zoom-39 {
+    38% { transform: scale(1);   }
+    39% { transform: scale(1.2); }
+    41% { transform: scale(1);   }
+}
+@keyframes zoom-40 {
+    39% { transform: scale(1);   }
+    40% { transform: scale(1.2); }
+    42% { transform: scale(1);   }
+}
+
+
+
+
+
+
+
+
+
+
+ul li:nth-child(41) {
+    -webkit-animation-name: zoom-41;
+    animation-name: zoom-41;
+}
+
+ul li:nth-child(42) {
+    -webkit-animation-name: zoom-42;
+    animation-name: zoom-42;
+}
+
+ul li:nth-child(43) {
+    -webkit-animation-name: zoom-43;
+    animation-name: zoom-43;
+}
+
+ul li:nth-child(44) {
+    -webkit-animation-name: zoom-44;
+    animation-name: zoom-44;
+}
+ul li:nth-child(45) {
+    -webkit-animation-name: zoom-45;
+    animation-name: zoom-45;
+}
+ul li:nth-child(46) {
+    -webkit-animation-name: zoom-46;
+    animation-name: zoom-46;
+}
+ul li:nth-child(47) {
+    -webkit-animation-name: zoom-47;
+    animation-name: zoom-47;
+}
+ul li:nth-child(48) {
+    -webkit-animation-name: zoom-48;
+    animation-name: zoom-48;
+}
+ul li:nth-child(49) {
+    -webkit-animation-name: zoom-49;
+    animation-name: zoom-49;
+}
+ul li:nth-child(50) {
+    -webkit-animation-name: zoom-50;
+    animation-name: zoom-50;
+}
+
+
+
+@keyframes zoom-41 {
+    40% { transform: scale(1);   }
+    41% { transform: scale(1.2); }
+    43% { transform: scale(1);   }
+}
+
+@keyframes zoom-42 {
+    41% { transform: scale(1);   }
+    42% { transform: scale(1.2); }
+    44% { transform: scale(1);   }
+}
+@keyframes zoom-43 {
+    42% { transform: scale(1);   }
+    43% { transform: scale(1.2); }
+    45% { transform: scale(1);   }
+}
+@keyframes zoom-44 {
+    43% { transform: scale(1);   }
+    44% { transform: scale(1.2); }
+    46% { transform: scale(1);   }
+}
+@keyframes zoom-45 {
+    44% { transform: scale(1);   }
+    45% { transform: scale(1.2); }
+    47% { transform: scale(1);   }
+}
+@keyframes zoom-46 {
+    45% { transform: scale(1);   }
+    46% { transform: scale(1.2); }
+    48% { transform: scale(1);   }
+}
+@keyframes zoom-47 {
+    46% { transform: scale(1);   }
+    47% { transform: scale(1.2); }
+    49% { transform: scale(1);   }
+}
+@keyframes zoom-48 {
+    47% { transform: scale(1);   }
+    48% { transform: scale(1.2); }
+    50% { transform: scale(1);   }
+}
+@keyframes zoom-49 {
+    48% { transform: scale(1);   }
+    49% { transform: scale(1.2); }
+    51% { transform: scale(1);   }
+}
+@keyframes zoom-50 {
+    49% { transform: scale(1);   }
+    50% { transform: scale(1.2); }
+    52% { transform: scale(1);   }
+}
+
+
+
+
+
+
+
+
+
+
+ul li:nth-child(51) {
+    -webkit-animation-name: zoom-51;
+    animation-name: zoom-51;
+}
+
+ul li:nth-child(52) {
+    -webkit-animation-name: zoom-52;
+    animation-name: zoom-52;
+}
+
+ul li:nth-child(53) {
+    -webkit-animation-name: zoom-53;
+    animation-name: zoom-53;
+}
+
+ul li:nth-child(54) {
+    -webkit-animation-name: zoom-54;
+    animation-name: zoom-54;
+}
+ul li:nth-child(55) {
+    -webkit-animation-name: zoom-55;
+    animation-name: zoom-55;
+}
+ul li:nth-child(56) {
+    -webkit-animation-name: zoom-56;
+    animation-name: zoom-56;
+}
+ul li:nth-child(57) {
+    -webkit-animation-name: zoom-57;
+    animation-name: zoom-57;
+}
+ul li:nth-child(58) {
+    -webkit-animation-name: zoom-58;
+    animation-name: zoom-58;
+}
+ul li:nth-child(59) {
+    -webkit-animation-name: zoom-59;
+    animation-name: zoom-59;
+}
+ul li:nth-child(60) {
+    -webkit-animation-name: zoom-60;
+    animation-name: zoom-60;
+}
+
+
+
+@keyframes zoom-51 {
+    50% { transform: scale(1);   }
+    51% { transform: scale(1.2); }
+    53% { transform: scale(1);   }
+}
+
+@keyframes zoom-52 {
+    51% { transform: scale(1);   }
+    52% { transform: scale(1.2); }
+    54% { transform: scale(1);   }
+}
+@keyframes zoom-53 {
+    52% { transform: scale(1);   }
+    53% { transform: scale(1.2); }
+    55% { transform: scale(1);   }
+}
+@keyframes zoom-54 {
+    53% { transform: scale(1);   }
+    54% { transform: scale(1.2); }
+    56% { transform: scale(1);   }
+}
+@keyframes zoom-55 {
+    54% { transform: scale(1);   }
+    55% { transform: scale(1.2); }
+    57% { transform: scale(1);   }
+}
+@keyframes zoom-56 {
+    55% { transform: scale(1);   }
+    56% { transform: scale(1.2); }
+    58% { transform: scale(1);   }
+}
+@keyframes zoom-57 {
+    56% { transform: scale(1);   }
+    57% { transform: scale(1.2); }
+    59% { transform: scale(1);   }
+}
+@keyframes zoom-58 {
+    57% { transform: scale(1);   }
+    58% { transform: scale(1.2); }
+    60% { transform: scale(1);   }
+}
+@keyframes zoom-59 {
+    58% { transform: scale(1);   }
+    59% { transform: scale(1.2); }
+    61% { transform: scale(1);   }
+}
+@keyframes zoom-60 {
+    59% { transform: scale(1);   }
+    60% { transform: scale(1.2); }
+    62% { transform: scale(1);   }
+}
+
+
+
+
+
+
+
+ul li:nth-child(61) {
+    -webkit-animation-name: zoom-61;
+    animation-name: zoom-61;
+}
+
+ul li:nth-child(62) {
+    -webkit-animation-name: zoom-62;
+    animation-name: zoom-62;
+}
+
+ul li:nth-child(63) {
+    -webkit-animation-name: zoom-63;
+    animation-name: zoom-63;
+}
+
+ul li:nth-child(64) {
+    -webkit-animation-name: zoom-64;
+    animation-name: zoom-64;
+}
+ul li:nth-child(65) {
+    -webkit-animation-name: zoom-65;
+    animation-name: zoom-65;
+}
+ul li:nth-child(66) {
+    -webkit-animation-name: zoom-66;
+    animation-name: zoom-66;
+}
+ul li:nth-child(67) {
+    -webkit-animation-name: zoom-67;
+    animation-name: zoom-67;
+}
+ul li:nth-child(68) {
+    -webkit-animation-name: zoom-68;
+    animation-name: zoom-68;
+}
+ul li:nth-child(69) {
+    -webkit-animation-name: zoom-69;
+    animation-name: zoom-69;
+}
+ul li:nth-child(70) {
+    -webkit-animation-name: zoom-70;
+    animation-name: zoom-70;
+}
+
+
+
+@keyframes zoom-61 {
+    60% { transform: scale(1);   }
+    61% { transform: scale(1.2); }
+    63% { transform: scale(1);   }
+}
+
+@keyframes zoom-62 {
+    61% { transform: scale(1);   }
+    62% { transform: scale(1.2); }
+    64% { transform: scale(1);   }
+}
+@keyframes zoom-63 {
+    62% { transform: scale(1);   }
+    63% { transform: scale(1.2); }
+    65% { transform: scale(1);   }
+}
+@keyframes zoom-64 {
+    63% { transform: scale(1);   }
+    64% { transform: scale(1.2); }
+    66% { transform: scale(1);   }
+}
+@keyframes zoom-65 {
+    64% { transform: scale(1);   }
+    65% { transform: scale(1.2); }
+    67% { transform: scale(1);   }
+}
+@keyframes zoom-66 {
+    65% { transform: scale(1);   }
+    66% { transform: scale(1.2); }
+    68% { transform: scale(1);   }
+}
+@keyframes zoom-67 {
+    66% { transform: scale(1);   }
+    67% { transform: scale(1.2); }
+    69% { transform: scale(1);   }
+}
+@keyframes zoom-68 {
+    67% { transform: scale(1);   }
+    68% { transform: scale(1.2); }
+    70% { transform: scale(1);   }
+}
+@keyframes zoom-69 {
+    68% { transform: scale(1);   }
+    69% { transform: scale(1.2); }
+    71% { transform: scale(1);   }
+}
+@keyframes zoom-70 {
+    69% { transform: scale(1);   }
+    70% { transform: scale(1.2); }
+    72% { transform: scale(1);   }
+}
+
+
+
+
+
+ul li:nth-child(71) {
+    -webkit-animation-name: zoom-71;
+    animation-name: zoom-71;
+}
+
+ul li:nth-child(72) {
+    -webkit-animation-name: zoom-72;
+    animation-name: zoom-72;
+}
+
+ul li:nth-child(73) {
+    -webkit-animation-name: zoom-73;
+    animation-name: zoom-73;
+}
+
+ul li:nth-child(74) {
+    -webkit-animation-name: zoom-74;
+    animation-name: zoom-74;
+}
+ul li:nth-child(75) {
+    -webkit-animation-name: zoom-75;
+    animation-name: zoom-75;
+}
+ul li:nth-child(76) {
+    -webkit-animation-name: zoom-76;
+    animation-name: zoom-76;
+}
+ul li:nth-child(77) {
+    -webkit-animation-name: zoom-77;
+    animation-name: zoom-77;
+}
+ul li:nth-child(78) {
+    -webkit-animation-name: zoom-78;
+    animation-name: zoom-78;
+}
+ul li:nth-child(79) {
+    -webkit-animation-name: zoom-79;
+    animation-name: zoom-79;
+}
+ul li:nth-child(80) {
+    -webkit-animation-name: zoom-80;
+    animation-name: zoom-80;
+}
+
+
+
+@keyframes zoom-71 {
+    70% { transform: scale(1);   }
+    71% { transform: scale(1.2); }
+    73% { transform: scale(1);   }
+}
+
+@keyframes zoom-72 {
+    71% { transform: scale(1);   }
+    72% { transform: scale(1.2); }
+    74% { transform: scale(1);   }
+}
+@keyframes zoom-73 {
+    72% { transform: scale(1);   }
+    73% { transform: scale(1.2); }
+    75% { transform: scale(1);   }
+}
+@keyframes zoom-74 {
+    73% { transform: scale(1);   }
+    74% { transform: scale(1.2); }
+    76% { transform: scale(1);   }
+}
+@keyframes zoom-75 {
+    74% { transform: scale(1);   }
+    75% { transform: scale(1.2); }
+    77% { transform: scale(1);   }
+}
+@keyframes zoom-76 {
+    75% { transform: scale(1);   }
+    76% { transform: scale(1.2); }
+    78% { transform: scale(1);   }
+}
+@keyframes zoom-77 {
+    76% { transform: scale(1);   }
+    77% { transform: scale(1.2); }
+    79% { transform: scale(1);   }
+}
+@keyframes zoom-78 {
+    77% { transform: scale(1);   }
+    78% { transform: scale(1.2); }
+    80% { transform: scale(1);   }
+}
+@keyframes zoom-79 {
+    78% { transform: scale(1);   }
+    79% { transform: scale(1.2); }
+    81% { transform: scale(1);   }
+}
+@keyframes zoom-80 {
+    79% { transform: scale(1);   }
+    80% { transform: scale(1.2); }
+    82% { transform: scale(1);   }
+}
+
+
+
+
+
+ul li:nth-child(81) {
+    -webkit-animation-name: zoom-81;
+    animation-name: zoom-81;
+}
+
+ul li:nth-child(82) {
+    -webkit-animation-name: zoom-82;
+    animation-name: zoom-82;
+}
+
+ul li:nth-child(83) {
+    -webkit-animation-name: zoom-83;
+    animation-name: zoom-83;
+}
+
+ul li:nth-child(84) {
+    -webkit-animation-name: zoom-84;
+    animation-name: zoom-84;
+}
+ul li:nth-child(85) {
+    -webkit-animation-name: zoom-85;
+    animation-name: zoom-85;
+}
+ul li:nth-child(86) {
+    -webkit-animation-name: zoom-86;
+    animation-name: zoom-86;
+}
+ul li:nth-child(87) {
+    -webkit-animation-name: zoom-87;
+    animation-name: zoom-87;
+}
+ul li:nth-child(88) {
+    -webkit-animation-name: zoom-88;
+    animation-name: zoom-88;
+}
+ul li:nth-child(89) {
+    -webkit-animation-name: zoom-89;
+    animation-name: zoom-89;
+}
+ul li:nth-child(90) {
+    -webkit-animation-name: zoom-90;
+    animation-name: zoom-90;
+}
+
+
+
+@keyframes zoom-81 {
+    80% { transform: scale(1);   }
+    81% { transform: scale(1.2); }
+    83% { transform: scale(1);   }
+}
+
+@keyframes zoom-82 {
+    81% { transform: scale(1);   }
+    82% { transform: scale(1.2); }
+    84% { transform: scale(1);   }
+}
+@keyframes zoom-83 {
+    82% { transform: scale(1);   }
+    83% { transform: scale(1.2); }
+    85% { transform: scale(1);   }
+}
+@keyframes zoom-84 {
+    83% { transform: scale(1);   }
+    84% { transform: scale(1.2); }
+    86% { transform: scale(1);   }
+}
+@keyframes zoom-85 {
+    84% { transform: scale(1);   }
+    85% { transform: scale(1.2); }
+    87% { transform: scale(1);   }
+}
+@keyframes zoom-86 {
+    85% { transform: scale(1);   }
+    86% { transform: scale(1.2); }
+    88% { transform: scale(1);   }
+}
+@keyframes zoom-87 {
+    86% { transform: scale(1);   }
+    87% { transform: scale(1.2); }
+    89% { transform: scale(1);   }
+}
+@keyframes zoom-88 {
+    87% { transform: scale(1);   }
+    88% { transform: scale(1.2); }
+    90% { transform: scale(1);   }
+}
+@keyframes zoom-89 {
+    88% { transform: scale(1);   }
+    89% { transform: scale(1.2); }
+    91% { transform: scale(1);   }
+}
+@keyframes zoom-90 {
+    89% { transform: scale(1);   }
+    90% { transform: scale(1.2); }
+    92% { transform: scale(1);   }
+}
+
+
+
+
+
+ul li:nth-child(91) {
+    -webkit-animation-name: zoom-91;
+    animation-name: zoom-91;
+}
+
+ul li:nth-child(92) {
+    -webkit-animation-name: zoom-92;
+    animation-name: zoom-92;
+}
+
+ul li:nth-child(93) {
+    -webkit-animation-name: zoom-93;
+    animation-name: zoom-93;
+}
+
+ul li:nth-child(94) {
+    -webkit-animation-name: zoom-94;
+    animation-name: zoom-94;
+}
+ul li:nth-child(95) {
+    -webkit-animation-name: zoom-95;
+    animation-name: zoom-95;
+}
+ul li:nth-child(96) {
+    -webkit-animation-name: zoom-96;
+    animation-name: zoom-96;
+}
+ul li:nth-child(97) {
+    -webkit-animation-name: zoom-97;
+    animation-name: zoom-97;
+}
+ul li:nth-child(98) {
+    -webkit-animation-name: zoom-98;
+    animation-name: zoom-98;
+}
+ul li:nth-child(99) {
+    -webkit-animation-name: zoom-99;
+    animation-name: zoom-99;
+}
+ul li:nth-child(100) {
+    -webkit-animation-name: zoom-100;
+    animation-name: zoom-100;
+}
+
+
+
+@keyframes zoom-91 {
+    90% { transform: scale(1);   }
+    91% { transform: scale(1.2); }
+    93% { transform: scale(1);   }
+}
+
+@keyframes zoom-92 {
+    91% { transform: scale(1);   }
+    92% { transform: scale(1.2); }
+    94% { transform: scale(1);   }
+}
+@keyframes zoom-93 {
+    92% { transform: scale(1);   }
+    93% { transform: scale(1.2); }
+    95% { transform: scale(1);   }
+}
+@keyframes zoom-94 {
+    93% { transform: scale(1);   }
+    94% { transform: scale(1.2); }
+    96% { transform: scale(1);   }
+}
+@keyframes zoom-95 {
+    94% { transform: scale(1);   }
+    95% { transform: scale(1.2); }
+    97% { transform: scale(1);   }
+}
+@keyframes zoom-96 {
+    95% { transform: scale(1);   }
+    96% { transform: scale(1.2); }
+    98% { transform: scale(1);   }
+}
+@keyframes zoom-97 {
+    96% { transform: scale(1);   }
+    97% { transform: scale(1.2); }
+    99% { transform: scale(1);   }
+}
+@keyframes zoom-98 {
+    97% { transform: scale(1);   }
+    98% { transform: scale(1.2); }
+    100% { transform: scale(1);   }
+}
+@keyframes zoom-99 {
+    98% { transform: scale(1);   }
+    99% { transform: scale(1.2); }
+    1% { transform: scale(1);   }
+}
+@keyframes zoom-100 {
+    99% { transform: scale(1);   }
+    100% { transform: scale(1.2); }
+    2% { transform: scale(1);   }
+}

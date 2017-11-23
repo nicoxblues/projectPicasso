@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Finnegans</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="styles/general.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="scripts/jquery-1.8.2.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var cuadro = 1;
+			var cuadroMax = 28;
+
+			var pasos = 1;
+
+
+			for (i = cuadro; i < cuadroMax+1; i++) { 
+				if (i < 10) {
+		    		$( "#preload" ).append( "<img src='styles/img/pasos_0" + i + ".svg'>" );
+		    	} else {
+					$( "#preload" ).append( "<img src='styles/img/pasos_" + i + ".svg'>" );    		
+	    		}
+			}
+
+
+
+			setInterval(function() {
+				/* Define al azar si se ejecuta el paso */
+				// activacion = Math.floor((Math.random() * 4) + 1);
+
+				// if (activacion == 1) { 
+
+					// pasos++;
+
+					if (cuadro < 10) {
+						$('#wrapper').css("background-image", "url(styles/img/pasos_0" + cuadro + ".svg");
+					} else {
+						$('#wrapper').css("background-image", "url(styles/img/pasos_" + cuadro + ".svg");
+					}
+					cuadro++;
+					if (cuadro > cuadroMax) { cuadro = 1; };
+
+					// $('h1').text(pasos + ' Pasos');
+
+
+				// }
+				
+
+			}, 500);
+
+
+
+			setInterval(function() {
+				/* Define al azar si se ejecuta el paso */
+				activacion = Math.floor((Math.random() * 5) + 1);
+
+				if (activacion == 1) { 
+
+					pasos = pasos + Math.floor((Math.random() * 10) + 1);
+					$('h1').text(pasos + ' Pasos');
+
+				}
+				
+
+			}, 20);
+		});
+
+
+
+	</script>
+
+</head>
+<body>
+	<div id="wrapper">
+		<div class="title">
+			<h1>1 Paso</h1>
+			<h2>Caminandos en la fiesta</h2>
+		</div>
+		<div id="pasos"></div>
+		<div id="preload"></div>
+	</div>
+</body>
+</html>

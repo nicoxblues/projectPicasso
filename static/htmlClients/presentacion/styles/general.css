@@ -1,0 +1,103 @@
+* {
+    outline: none;
+}
+
+html {
+    margin: 0px;
+    font-family: Arial, Verdana, sans-serif;
+    height: 100%;
+}
+
+body {
+    padding: 50px 50px 50px 50px;
+    margin: 0;
+    box-sizing: border-box;
+    height: 100%;
+    background-color: #ffb902;
+    /*     background-color: #273347;
+    background-color: #4f4da7; */
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+a {
+    text-decoration: none;
+    color: #0072e6;
+}
+
+h1, h2, ul, p {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+
+
+#wrapper {
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    height: 100%;
+
+
+}
+#wrapper #intro{
+    display: flex;
+    flex: 1;
+}
+
+#wrapper #intro p{
+    font-size: 15px;
+    line-height: 23px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+/*     color: #ffffff; */
+    color: #1b2432;
+/*         -webkit-columns: 100px 3;
+    -moz-columns: 100px 3;
+    columns: 100px 3; */
+    width: 33%;
+    padding: 0 15px;
+    box-sizing: border-box;
+
+}
+
+#wrapper #hash{
+    font-size: 28px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    color: #1b2432;
+    padding-left: 15px;
+}
+
+
+#wrapper #hash span{
+    -webkit-animation-name: flash;
+    animation-name: flash;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+}
+
+@keyframes flash {
+    0% { opacity: 1}
+    49% { opacity: 1}
+    50% { opacity: 0}
+    100% { opacity: 0}
+}
+
+
+
+@media screen and (max-width: 1200px) {
+/*     ul li{
+        width: 10%;
+        height: 10%;
+    } */
+}

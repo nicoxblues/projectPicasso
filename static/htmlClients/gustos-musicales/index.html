@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Finnegans</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="styles/general.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="scripts/jquery-1.8.2.min.js"></script>
+
+	<script type="text/javascript">
+		var valores = ['10','10','10','10'];
+		shuffle(valores);
+
+		function shuffle(a) {
+		    for (let i = a.length - 1; i > 0; i--) {
+		        const j = Math.floor(Math.random() * (i + 1));
+		        [a[i], a[j]] = [a[j], a[i]];
+		    }
+		}
+
+
+
+
+		var valor1 = 5;
+		var valor2 = 5;
+		var valor3 = 5;
+		var valor4 = 5;
+		var valorBase1 = 5;
+		var valorBase2 = 5;
+		var valorBase3 = 5;
+		var valorBase4 = 5;
+
+		var activacion = 1;
+
+		$(document).ready(function(){
+			/* Crea 20 ítems en el gráfico */
+			for (i = 0; i < 20; i++) { 
+	    		$( "ul" ).append( "<li><span></span></li>" );
+			}
+
+			/* Define el valor en el gráfico */
+			setGraph(valor1,valor2,valor3,valor4);
+
+
+
+			setInterval(function() {
+
+				/* Define al azar si se ejecuta el timer */
+				activacion = Math.floor((Math.random() * 1) + 1);
+				if (activacion == 1) { 
+
+					/* Define nuevos valores del gráfico */
+					valor1 = Math.floor(Math.random() * 19) + 1;
+					valor2 = Math.floor(Math.random() * (19-valor1)) + 1;
+					valor3 = Math.floor(Math.random() * (19-valor1-valor2)) + 1;
+					valor4 = 20-valor1-valor2-valor3;
+
+					valores = [valor1,valor2,valor3,valor4];
+					shuffle(valores);
+					valor1 = valores[0];
+					valor2 = valores[1];
+					valor3 = valores[2];
+					valor4 = valores[3];
+
+
+
+					console.log (" ");
+					console.log ("VALORES NUEVOS");
+					console.log ("valorBase1: " + valorBase1 + ", valor1: " + valor1);
+					console.log ("valorBase2: " + valorBase2 + ", valor2: " + valor2);
+					console.log ("valorBase3: " + valorBase3 + ", valor3: " + valor3);
+					console.log ("valorBase4: " + valorBase4 + ", valor4: " + valor4);
+					console.log (" ");
+
+					aniGraph();
+				};
+
+			}, 10000);
+		});
+
+		/* Define el valor en el gráfico */
+		function setGraph(valor1,valor2,valor3,valor4) {
+			$("ul#type1 li:lt("+valor1+")").removeClass( "on").addClass("on");
+			$("ul#type1 li:gt("+(valor1-1)+")").removeClass( "on");
+
+			$("ul#type2 li:lt("+valor2+")").removeClass( "on").addClass("on");
+			$("ul#type2 li:gt("+(valor2-1)+")").removeClass( "on");
+
+			$("ul#type3 li:lt("+valor3+")").removeClass( "on").addClass("on");
+			$("ul#type3 li:gt("+(valor3-1)+")").removeClass( "on");
+
+			$("ul#type4 li:lt("+valor4+")").removeClass( "on").addClass("on");
+			$("ul#type4 li:gt("+(valor4-1)+")").removeClass( "on");
+		}
+
+
+		/* realiza progresivamente la transición del gráfico a un nuevo valor */
+		function aniGraph() {
+			aG = setInterval(function() {
+
+				if (valorBase1 < valor1) { valorBase1++; };
+				if (valorBase1 > valor1) { valorBase1--; };
+
+				if (valorBase2 < valor2) { valorBase2++; };
+				if (valorBase2 > valor2) { valorBase2--; };
+
+				if (valorBase3 < valor3) { valorBase3++; };
+				if (valorBase3 > valor3) { valorBase3--; };
+
+				if (valorBase4 < valor4) { valorBase4++; };
+				if (valorBase4 > valor4) { valorBase4--; };
+
+
+
+				if (valorBase1 == valor1 &&
+					valorBase2 == valor2 &&
+					valorBase3 == valor3 &&
+					valorBase4 == valor4) { 
+					console.log (" ");
+					console.log ("aniGraph");
+					console.log ("valorBase1: " + valorBase1 + ", valor1: " + valor1);
+					console.log ("valorBase2: " + valorBase2 + ", valor2: " + valor2);
+					console.log ("valorBase3: " + valorBase3 + ", valor3: " + valor3);
+					console.log ("valorBase4: " + valorBase4 + ", valor4: " + valor4);
+					console.log (" ");
+					clearInterval(aG);
+				};
+
+
+				setGraph(valorBase1, valorBase2, valorBase3, valorBase4);
+			}, 100);
+		}
+
+
+	</script>
+
+</head>
+<body>
+	<div id="wrapper">
+		<ul id="type1"></ul>
+		<ul id="type2"></ul>
+		<ul id="type3"></ul>
+		<ul id="type4"></ul>
+	</div>
+	<h1>Gustos Musicales</h1>
+</body>
+</html>

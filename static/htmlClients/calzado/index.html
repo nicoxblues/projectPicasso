@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Finnegans</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="styles/general.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="scripts/jquery-1.8.2.min.js"></script>
+
+	<script type="text/javascript">
+		var valores = ['10','10','10','10'];
+		shuffle(valores);
+
+		function shuffle(a) {
+		    for (let i = a.length - 1; i > 0; i--) {
+		        const j = Math.floor(Math.random() * (i + 1));
+		        [a[i], a[j]] = [a[j], a[i]];
+		    }
+		}
+
+		var valor1 = 25;
+		var valor2 = 25;
+		var valor3 = 25;
+		var valor4 = 25;
+		var valor5 = 25;
+		var valor6 = 25;
+		var valor7 = 25;
+		var valor8 = 25;
+
+		var activacion = 1;
+
+		$(document).ready(function(){
+			/* Define los valores del gráfico */
+			setGraph(valor1,valor2,valor3,valor4,valor5,valor6,valor7,valor8);
+
+
+
+			setInterval(function() {
+
+				/* Define al azar si se ejecuta el timer */
+				activacion = Math.floor((Math.random() * 1) + 1);
+				if (activacion == 1) { 
+
+					/* Define nuevos valores del gráfico */
+					valor1 = Math.floor(Math.random() * 99) + 1;
+					valor2 = Math.floor(Math.random() * (99-valor1)) + 1;
+					valor3 = Math.floor(Math.random() * (99-valor1-valor2)) + 1;
+					valor4 = 100-valor1-valor2-valor3;
+
+					valores = [valor1,valor2,valor3,valor4];
+					shuffle(valores);
+					valor1 = valores[0];
+					valor2 = valores[1];
+					valor3 = valores[2];
+					valor4 = valores[3];
+
+
+
+
+					valor5 = Math.floor(Math.random() * 99) + 1;
+					valor6 = Math.floor(Math.random() * (99-valor5)) + 1;
+					valor7 = Math.floor(Math.random() * (99-valor5-valor6)) + 1;
+					valor8 = 100-valor5-valor6-valor7;
+
+					valores = [valor5,valor6,valor7,valor8];
+					shuffle(valores);
+					valor5 = valores[0];
+					valor6 = valores[1];
+					valor7 = valores[2];
+					valor8 = valores[3];
+
+
+
+					setGraph(valor1,valor2,valor3,valor4,valor5,valor6,valor7,valor8);
+				};
+
+			}, 10000);
+		});
+
+		/* Define el valor en el gráfico */
+		function setGraph(valor1,valor2,valor3,valor4,valor5,valor6,valor7,valor8) {
+			$("#type1 span").height(valor1 + "%");
+			$("#type2 span").height(valor2 + "%");
+			$("#type3 span").height(valor3 + "%");
+			$("#type4 span").height(valor4 + "%");
+			$("#type5 span").height(valor5 + "%");
+			$("#type6 span").height(valor6 + "%");
+			$("#type7 span").height(valor7 + "%");
+			$("#type8 span").height(valor8 + "%");
+		}
+
+
+
+	</script>
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="women">
+			<div class="graph">
+				<div id="type1"><span></span></div>
+				<div id="type2"><span></span></div>
+				<div id="type3"><span></span></div>
+				<div id="type4"><span></span></div>
+			</div>
+			<h2>Mujeres</h2>
+		</div>
+		<div id="man">
+			<div class="graph">
+				<div id="type5"><span></span></div>
+				<div id="type6"><span></span></div>
+				<div id="type7"><span></span></div>
+				<div id="type8"><span></span></div>
+			</div>
+			<h2>Hombres</h2>
+		</div>
+	</div>
+	<h1>Calzado Utilizado</h1>
+</body>
+</html>

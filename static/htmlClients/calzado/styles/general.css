@@ -1,0 +1,207 @@
+* {
+    outline: none;
+}
+
+html {
+    margin: 0px;
+    font-family: Arial, Verdana, sans-serif;
+    height: 100%;
+}
+
+body {
+    padding: 60px 50px 50px 50px;
+    margin: 0;
+    box-sizing: border-box;
+    height: 100%;
+    background-color: #179dba;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+a {
+    text-decoration: none;
+    color: #0072e6;
+}
+
+h1, h2, ul, p {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+
+#wrapper {
+    display: flex;
+    flex: 1;
+}
+
+#wrapper .graph{
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex: 1;
+    padding-right: 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+
+#wrapper #women,
+#wrapper #man{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    flex: 1;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+
+
+#wrapper #women .graph div,
+#wrapper #man .graph div{
+    flex: 1;
+    display: flex;
+    /* height: 100%; */
+    flex-direction: row;
+    align-items: flex-end;
+    background-color: #1aafd0;
+    /*     display: flex; */
+    border-left: 5px solid #179dba;
+    border-right: 5px solid #179dba;
+}
+
+#wrapper div span{
+    display: block;
+    width: 100%;
+    transition: 2s all;
+    position: relative;
+}
+
+
+#wrapper #women div span{
+    background-color: #fc636b;
+}
+#wrapper #man div span{
+    background-color: #02ceff;
+}
+
+#wrapper div span:after{
+    content: " ";
+    height: 80px;
+    width: 100%;
+    background-color: #FFF;
+    display: block;
+    position: absolute;
+    top: -80px;
+}
+
+#wrapper div #type1 span:after{
+    background: url(img/calzado_w1.svg) no-repeat center bottom;
+    background-size: 90% auto;
+}
+#wrapper div #type2 span:after{
+    background: url(img/calzado_w2.svg) no-repeat center bottom;
+    background-size: 85% auto;
+}
+#wrapper div #type3 span:after{
+    background: url(img/calzado_w3.svg) no-repeat center bottom;
+    background-size: 78% auto;
+}
+#wrapper div #type4 span:after{
+    background: url(img/calzado_w4.svg) no-repeat center bottom;
+    background-size: 80% auto;
+}
+
+
+
+#wrapper div #type5 span:after{
+    background: url(img/calzado_m1.svg) no-repeat center bottom;
+    background-size: 90% auto;
+}
+#wrapper div #type6 span:after{
+    background: url(img/calzado_m2.svg) no-repeat center bottom;
+    background-size: 90% auto;
+}
+#wrapper div #type7 span:after{
+    background: url(img/calzado_m3.svg) no-repeat center bottom;
+    background-size: 90% auto;
+}
+#wrapper div #type8 span:after{
+    background: url(img/calzado_m4.svg) no-repeat center bottom;
+    background-size: 83% auto;
+}
+
+
+
+
+
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    width: 25%;
+    flex-direction: column-reverse;
+    box-sizing: border-box;
+    position: relative;
+}
+
+ul:after{
+    content: "";
+    background:rgba(0, 0, 0, 0.66);
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 30%;
+    margin: 0 10px;
+    z-index: 3;
+    position: absolute;
+}
+
+
+
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-size: 100px;
+    margin-top: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+}
+
+h2 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #273347;
+    font-size: 50px;
+    margin-top: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 200;
+}
+
+
+
+
+#wrapper .graph div {
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-duration: 10s;
+    animation-duration: 10s;
+    -webkit-animation-name: flash;
+    animation-name: flash;
+}
+
+@keyframes flash {
+    0% { background-color: #FFF;   }
+    10% { background-color: #1aafd0; }
+}

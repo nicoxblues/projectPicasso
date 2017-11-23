@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Finnegans</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="styles/general.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="scripts/jquery-1.8.2.min.js"></script>
+
+	<script type="text/javascript">
+		var hombres = 50;
+		var hombresBase = 50;
+
+		$(document).ready(function(){
+			/* Crea 100 iconos en el gráfico */
+			for (i = 0; i < 100; i++) { 
+	    		$( "ul" ).append( "<li><span></span></li>" );
+			}
+
+			/* Define % de hombres en el gráfico */
+			setGraph(hombres);
+
+
+
+			setInterval(function() {
+
+				/* Define al azar si se ejecuta el timer */
+				var activacion = Math.floor((Math.random() * 1) + 1);
+				if (activacion == 1) { 
+
+					/* Define nuevo valor del gráfico */
+					var variacion = Math.floor(Math.random() * 8) + 1;
+					variacion *= Math.floor(Math.random()*2) == 1 ? 1 : -1; // agrega signo negativo al resultado en el 50% de los casos
+
+					hombres = hombres + variacion;
+					if (hombres < 30) { hombres = 30 };
+					if (hombres > 70) { hombres = 70 };
+
+					aniGraph();
+				};
+
+			}, 60000);
+		});
+
+		/* Define % de hombres en el gráfico */
+		function setGraph(porcentajeHombres) {
+			$("ul li:lt("+porcentajeHombres+")").removeClass( "woman").addClass("man");
+			$("ul li:gt("+(porcentajeHombres-1)+")").removeClass( "man").addClass("woman");
+		}
+
+
+		/* realiza progresivamente la transición del gráfico a un nuevo valor */
+		function aniGraph() {
+			aG = setInterval(function() {
+				console.log ("hombresBase: " + hombresBase + ", hombres: " + hombres);
+
+				if (hombresBase < hombres) { hombresBase++; };
+				if (hombresBase > hombres) { hombresBase--; };
+				if (hombresBase == hombres) { 
+					clearInterval(aG);
+				 };
+				setGraph(hombresBase);
+			}, 200);
+		}
+
+
+	</script>
+
+</head>
+<body>
+	<ul></ul>
+	<h1>Invitados</h1>
+</body>
+</html>
