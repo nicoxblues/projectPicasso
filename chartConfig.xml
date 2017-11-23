@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <data>
-   <chartConfig name='Personas' title='inserte algo interesante aqui ! :D' type='pie' id="personas" svgRoot="/svg/zapato.svg" htmlDivRoot="htmlClients/html1.html">
+   <chartConfig name='Personas' title='inserte algo interesante aqui ! :D' type='pie' id="personas" svgRoot="/svg/zapato.svg" htmlDivRoot="http://www.estudiocukier.com/clientes/finnegans/invitados/index.html">
 
        <rangeValues>
            <minValue>0</minValue>
@@ -32,7 +32,7 @@
       </rows>
    </chartConfig>
 
-    <chartConfig name='Personas' title='inserte algo interesante aqui ! :D' type='pie' id="personas" svgRoot="/svg/zapato.svg" htmlDivRoot="htmlClients/html2.html">
+    <chartConfig name='Personas' title='inserte algo interesante aqui ! :D' type='pie' id="personas" svgRoot="/svg/zapato.svg" htmlDivRoot="http://www.estudiocukier.com/clientes/finnegans/gustos-musicales/index.html">
 
         <rangeValues>
             <minValue>0</minValue>
@@ -63,6 +63,40 @@
             </element>
         </rows>
     </chartConfig>
+
+    <chartConfig name='Personas' title='inserte algo interesante aqui ! :D' type='pie' id="personas" svgRoot="/svg/zapato.svg" htmlDivRoot="http://www.estudiocukier.com/clientes/finnegans/presentacion/index.html">
+
+        <rangeValues>
+            <minValue>0</minValue>
+            <maxValue>500</maxValue>
+        </rangeValues>
+        <Columns>
+
+
+            <element>
+                <colName>variable 1 del grafico</colName>
+                <colType>string</colType>
+            </element>
+
+            <element>
+                <colName>otra variable</colName>
+                <colType>number</colType>
+            </element>
+
+        </Columns>
+        <rows>
+            <element>
+                <rowName>test</rowName>
+                <rowValue>500</rowValue>
+            </element>
+            <element>
+                <rowName>testII</rowName>
+                <rowValue>500</rowValue>
+            </element>
+        </rows>
+    </chartConfig>
+
+
 
 
 

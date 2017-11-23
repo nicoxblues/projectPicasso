@@ -59,7 +59,7 @@ func wsHandler(manager *ClientHandler, w http.ResponseWriter, r *http.Request) {
 		config: deviceConfiguration{height, width, image.Point{coorX, coorY}},
 		socket: conn,  prossPic: make(chan image.Image), send: make(chan []byte), manager: manager}
 
-	client.loadClintConfig()
+	client.loadClientConfig()
 
 	client.manager.charConf[client.clientChart.ChartID] = client.clientChart
 
@@ -156,7 +156,7 @@ func (c *Client) getChunkImageForClient(originImage *image.Image) image.Image {
 	return m0 //resize.Resize(uint(chunkWidth), uint(chunkHeight),m0,resize.Lanczos3)
 }
 
-func (c *Client) loadClintConfig() {
+func (c *Client) loadClientConfig() {
 	if c.clientChart == nil {
 		c.clientChart  = c.manager.serverConf.nextChart()
 		c.clientID= c.clientChart.ChartID

@@ -52,8 +52,10 @@ function sendData(){
 
                 ChartElement.setAttribute("src", data) ;
                 ChartElement.style.display = 'block';
+
                 imgElement.style.display = 'none';
                 firstLoad = false;
+
             }else if (data.indexOf("Charts") !== -1) {
                 imgElement.setAttribute("src", "data:image/jpg;base64,");
                 ChartElement.style.display = 'block';

@@ -6,9 +6,23 @@
 
     <script type="application/javascript" src="pageHandler.js" ></script>
 </head>
+
+<script>
+    window.onload= function() {
+        var titulo = document.getElementById("titulo");
+        var i = 0;
+
+        setInterval(function(){
+            titulo.innerText = titulo.innerText + " " + i;
+            i++
+
+        }, 3000);
+    }
+
+</script>
 <body>
 
-<h1> grafico 1 </h1>
+<h1 id="titulo"> grafico 1  </h1>
 
 </body>
 </html>
