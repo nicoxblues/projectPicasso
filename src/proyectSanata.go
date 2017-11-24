@@ -39,14 +39,15 @@ func main() {
 	http.HandleFunc("/showChart", func(writer http.ResponseWriter, request *http.Request) {
 		clientHandler.showCharts()
 	})
+	http.HandleFunc("/resetFinneg", func(writer http.ResponseWriter, request *http.Request) {
+		clientHandler.resetFin()
+	})
 
 	http.HandleFunc("/manager", func(w http.ResponseWriter, request *http.Request) {
 			mainPageLoader(w,clientHandler)
-		})
-
-	http.HandleFunc("/update", func(w http.ResponseWriter, request *http.Request) {
-		updateChart("personas",clientHandler)
 	})
+
+
 
 
 

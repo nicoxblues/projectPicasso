@@ -18,7 +18,8 @@ function sendData(){
     mainDiv.style.display = 'none';
 
     var imgElement  = document.getElementById("imageElemnet");
-    var  ChartElement = document.getElementById("chart_frame");
+    var chartElement = document.getElementById("chart_frame");
+    var resetElement = document.getElementById("reset_frame");
 
     var fullScreenHeight = window.screen.availHeight; // * pixelRatio;
     var fullScreenWidth = window.screen.availWidth; //* pixelRatio;
@@ -51,21 +52,36 @@ function sendData(){
 
                 setTimeout(function(){
 
-                    ChartElement.setAttribute("src", data) ;
-                    ChartElement.style.display = 'block';
+                    chartElement.setAttribute("src", data) ;
+                    chartElement.style.display = 'block';
 
                     imgElement.style.display = 'none';
-                    firstLoad = false;},300)
+                    firstLoad = false;}
+                    ,300)
 
 
             }else if (data.indexOf("Charts") !== -1) {
                 imgElement.setAttribute("src", "data:image/jpg;base64,");
-                ChartElement.style.display = 'block';
                 imgElement.style.display = 'none';
+                resetElement.style.display = 'none';
+
+                chartElement.style.display = 'block';
+
+
+            }else if (data.indexOf("resetFinneg") !== -1) {
+
+                chartElement.style.display = 'none';
+                imgElement.style.display = 'none';
+
+
+                resetElement.style.display = 'block';
+                resetElement.contentWindow.location.reload();
+
 
             }else {
                 imgElement.setAttribute("src", "data:image/jpg;base64," + data);
-                ChartElement.style.display = 'none';
+                chartElement.style.display = 'none';
+                resetElement.style.display = 'none';
                 imgElement.style.display = 'block';
 
             }
