@@ -1,45 +1,42 @@
 package main
 
 import (
-
+	"bytes"
+	"encoding/base64"
+	"fmt"
+	"github.com/gorilla/websocket"
 	"image"
+	"image/draw"
 	"image/jpeg"
 	"log"
 	"net/http"
 	"strconv"
-	"github.com/gorilla/websocket"
-	"fmt"
-	"image/draw"
-	"bytes"
-	"encoding/base64"
-)
 
+
+)
 
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
 }
 
-
 type Client struct {
-	socket      *websocket.Conn
-	clientID    string
-	config      deviceConfiguration
-	isConnected bool
-	send        chan []byte
-	prossPic    chan image.Image
-	sendPic     chan []byte
-	graphicID   int
-	manager *ClientManager
+	socket    *websocket.Conn
+	clientID   string
+	config    deviceConfiguration
+	send      chan []byte
+	prossPic  chan image.Image
+	sendPic   chan []byte
+	clientChart *chartConfig
+	manager   *ClientHandler
 }
 
 
 
-
-func wsHandler(manager *ClientManager , w http.ResponseWriter  , r *http.Request) {
+func wsHandler(manager *ClientHandler, w http.ResponseWriter, r *http.Request) {
 
 	if r.Header.Get("Origin") != "http://"+r.Host {
-		http.Error(w, "Origin not allowed", 403)
+		http.Error(w, "oh no ! :(", 403)
 		return
 	}
 
@@ -56,19 +53,24 @@ func wsHandler(manager *ClientManager , w http.ResponseWriter  , r *http.Request
 	coorX, _ := strconv.Atoi(queryValues.Get("coordenadasX"))
 	coorY, _ := strconv.Atoi(queryValues.Get("coordenadasY"))
 
-	client := &Client{clientID: "test",
-		config: deviceConfiguration{height, width, image.Point{coorX, coorY}},
-		socket: conn, isConnected: true, graphicID: 1, prossPic: make(chan image.Image), send: make(chan []byte),manager:manager}
 
-	//manager.register <- client
+
+	client := &Client{
+		config: deviceConfiguration{height, width, image.Point{coorX, coorY}},
+		socket: conn,  prossPic: make(chan image.Image), send: make(chan []byte), manager: manager}
+
+	client.loadClientConfig()
+
+	client.manager.charConf[client.clientChart.ChartID] = client.clientChart
+
 
 	client.manager.register <- client
+	//conn.WriteJSON(client.clientChart)
+	conn.WriteMessage(websocket.TextMessage,[]byte(client.clientChart.HtmlDivRoot))
 
 	go client.processPic()
 	go client.read()
 	go client.write()
-
-
 
 }
 
@@ -129,10 +131,6 @@ func (c *Client) read() {
 			break
 		}
 
-
-
-
-
 	}
 
 }
@@ -158,6 +156,14 @@ func (c *Client) getChunkImageForClient(originImage *image.Image) image.Image {
 	return m0 //resize.Resize(uint(chunkWidth), uint(chunkHeight),m0,resize.Lanczos3)
 }
 
+func (c *Client) loadClientConfig() {
+	if c.clientChart == nil {
+		c.clientChart  = c.manager.serverConf.nextChart()
+		c.clientID= c.clientChart.ChartID
+	}
+
+
+}
 
 func getEncodeImage(image image.Image) string {
 
@@ -173,4 +179,5 @@ func getEncodeImage(image image.Image) string {
 	return encodedString
 
 }
+
 

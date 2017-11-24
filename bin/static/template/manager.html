@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="/template/UImanager.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<p> dispositivos conectados {{.NumClientConnected}}</p>
+
+
+
+<input  type="button" name="enviar" value="mostrar imagen" onclick="show()" >
+<input  type="button" name="enviar" value="mostrar Graficos" onclick="showCharts()" >
+
+</br></br></br></br></br>
+
+<div class="container">
+
+{{range .Forms}}
+        <div style="border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid">
+
+            </br><form id="{{.FormID}}" action="{{.FormID}}" >
+            <p><b>{{.FormTitle}} </b></p>
+                    {{range .InputName}}
+                        <p> {{.}} : <input type="number" value="0" /></p>
+
+                    {{end}}
+            <input  type="button" name="enviar" value="enviar" onclick="send(this)" >
+        </form>
+    </div>
+    </br>
+{{end}}
+
+</div>
+<!--
+type formData struct {
+
+FormTitle            string
+DeviceIdentification string
+InputName            []string
+
+
+}
+
+type pageData struct {
+NumClientConnected int
+Forms [] formData
+
+}-->
+
+
+
+
+</body>
+</html>

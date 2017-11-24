@@ -1,42 +1,55 @@
 package main
 
 import (
-
 	"image"
 )
 
-
-type ClientManager struct {
+type ClientHandler struct {
 	clients      map[*Client]bool
 	picture      chan image.Image
 	broadcast    chan []byte
 	register     chan *Client
 	unregister   chan *Client
 	picBroadcast chan map[*Client][]byte
-
+	serverConf *serverConfiguration
+	charConf      map[string] *chartConfig
 
 }
 
-func newManager() *ClientManager {
-	return &ClientManager{
-		picture:      make(chan image.Image),
-		broadcast:    make(chan []byte),
-		register:     make(chan *Client),
-		unregister:   make(chan *Client),
-		clients:      make(map[*Client]bool),
-		}
+func newClientHandler() *ClientHandler {
+
+	serverConf := new (serverConfiguration)
+	serverConf.loadConfig()
+	return &ClientHandler{
+		picture:    make(chan image.Image),
+		broadcast:  make(chan []byte),
+		register:   make(chan *Client),
+		unregister: make(chan *Client),
+		clients:    make(map[*Client]bool),
+		serverConf: serverConf,
+		charConf:	make(map[string] *chartConfig),
+	}
+
 }
 
 
-func (manager *ClientManager) send(message []byte) {
+
+func (manager *ClientHandler) send(message []byte) {
 	for conn := range manager.clients {
 		conn.send <- message
 
 	}
 }
 
-func (manager *ClientManager) start() {
+func (manager *ClientHandler) showCharts(){
+	for client := range manager.clients {
+		client.send <- []byte("showCharts");
+	}
 
+
+}
+
+func (manager *ClientHandler) start() {
 
 	for {
 		select {
@@ -55,8 +68,6 @@ func (manager *ClientManager) start() {
 			for client := range manager.clients {
 				client.prossPic <- pic
 			}
-
-
 		}
 
 	}

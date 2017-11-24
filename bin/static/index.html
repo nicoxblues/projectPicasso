@@ -1,96 +1,40 @@
 <!DOCTYPE html>
 <html>
+
+<script src="pageHandler.js"></script>
+
+
 <body>
+
+<div id="mainPage">
 
 <h2>Project picasso - initial config  </h2>
 
 
-<p> indicar las coordenadas  </p>
+<p id="subTitulo"> indicar las coordenadas  </p>
 
 
 <form id="formCordenadas">
     posicion x <br>
-    <input type="text" name="xPos" /><br>
+    <input type="text" name="xPos" value="0" /><br>
     posicion y <br>
-    <input type="text" name="yPos" /><br>
+    <input type="text" name="yPos" value="0"/><br>
 
     <input  type="button" name="enviar" value="enviar" onclick="sendData()" >
 
 </form>
+</div>
+
+<div id="main">
+
+    <iframe id="chart_frame" frameborder="0" border="0" cellspacing="0" scrolling="no"  src="" style="width:100%;height:100%;position: absolute; display:none;  top: 0; left: 0;overflow: hidden;"  ></iframe>
 
 
 
 
+    <img id="imageElemnet" src=""  onclick="toggleFullScreen()"  style="width:100%;height:100%;position: absolute; display:none;  top: 0; left: 0; " />
+</div>
 
-<img id="imageElemnet" src=""   style="width:100%;height:100%;position: absolute; display:none;  top: 0; left: 0; ">
-
-<script type="text/javascript">
-
-    function sendData(){
-
-        var form = document.getElementById("formCordenadas");
-
-        var posX = document.querySelector('[name="xPos"]').value;
-        var posY = document.querySelector('[name="yPos"]').value;
-
-
-        var imgElement  = document.getElementById("imageElemnet");
-
-        var fullScreenHeight = window.screen.availHeight;
-        var fullScreenWidth = window.screen.availWidth;
-
-        var url = "ws://"  + document.location.host + "/ws?height=" + fullScreenHeight + "&width=" + fullScreenWidth + "&coordenadasX=" + posX  + "&coordenadasY=" +  posY ;
-
-        var ws;
-        if (window.WebSocket === undefined) {
-            $("#container").append("Your browser does not support WebSockets");
-            return;
-        } else {
-            ws = initWS();
-        }
-        function initWS() {
-            var socket = new WebSocket(url);
-            //   container = $("#container")
-            socket.onopen = function() {
-                console.log("open")
-            };
-
-            socket.onmessage = function (e) {
-                console.log("mensaje");
-                toggleFullScreen();
-                var data = e.data;
-                imgElement.setAttribute("src","data:image/jpg;base64," + data);
-                imgElement.style.display = 'block';
-            };
-
-            socket.onclose = function () {
-                console.log("cerrar")
-            };
-            return socket;
-        }
-
-
-
-
-    }
-
-    function toggleFullScreen() {
-        var doc = window.document;
-        var docEl = doc.documentElement;
-
-        var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-        var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-
-        if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-            requestFullScreen.call(docEl);
-        }
-        else {
-            cancelFullScreen.call(doc);
-        }
-    }
-
-
-</script>
 
 </body>
 </html>
